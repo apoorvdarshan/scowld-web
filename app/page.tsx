@@ -65,10 +65,10 @@ export default function Home() {
               <span className="text-[10px] font-semibold tracking-[0.12em] text-white/30 uppercase">Open source on GitHub</span>
             </div>
 
-            <h1 className="animate-fade-up delay-1 text-[clamp(44px,6.5vw,82px)] font-extrabold leading-[0.92] tracking-[-0.04em] text-white">
+            <h1 className="animate-fade-up delay-1 text-[clamp(48px,7vw,90px)] font-semibold leading-[0.92] tracking-[-0.02em] text-white" style={{ fontFamily: "'Clash Display', sans-serif" }}>
               Talk to her.
               <br />
-              <span className="bg-gradient-to-r from-white/20 to-white/8 bg-clip-text text-transparent">She remembers.</span>
+              <span className="text-white/15">She remembers.</span>
             </h1>
 
             <p className="animate-fade-up delay-2 mt-6 max-w-[380px] text-[15px] leading-[1.8] text-white/30">
@@ -127,7 +127,7 @@ export default function Home() {
             <span className="w-4 h-px bg-cyan-400/40" />
             Capabilities
           </p>
-          <h2 className="animate-fade-up delay-1 text-[clamp(28px,3.5vw,44px)] font-bold tracking-[-0.03em] text-white leading-tight">
+          <h2 className="animate-fade-up delay-1 text-[clamp(28px,3.5vw,44px)] font-semibold tracking-[-0.02em] text-white leading-tight" style={{ fontFamily: "'Clash Display', sans-serif" }}>
             Everything built in.
           </h2>
           <p className="animate-fade-up delay-2 text-[14px] text-white/20 mt-3 max-w-[360px]">
