@@ -3,321 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scowld - Your AI Companion</title>
-    <link rel="icon" type="image/png" href="assets/logo-dark.png">
+    <title>Scowld — Your AI Companion</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *{margin:0;padding:0;box-sizing:border-box}
 
-        :root {
-            --cyan: #00d4ff;
-            --blue: #3366ff;
-            --dark: #0a0a0f;
-            --card: #12121a;
-            --border: #1e1e2e;
-            --text: #e0e0e0;
-            --muted: #6b7280;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-            background: var(--dark);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
+        :root{
+            --cyan:#00d4ff;
+            --blue:#3366ff;
+            --purple:#7c3aed;
+            --dark:#06060b;
+            --surface:#0d0d14;
+            --card:#10101a;
+            --border:rgba(255,255,255,0.06);
+            --text:#c8cdd5;
+            --muted:#4a5568;
+            --white:#f0f2f5;
+            --glow:rgba(0,212,255,0.12);
         }
 
-        a { color: var(--cyan); text-decoration: none; transition: opacity 0.2s; }
-        a:hover { opacity: 0.8; }
-
-        /* Nav */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 16px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            z-index: 100;
-        }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-        }
-        .nav-logo img { width: 28px; height: 28px; }
-        .nav-links { display: flex; gap: 32px; }
-        .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; }
-        .nav-links a:hover { color: white; }
-
-        /* Hero */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 40px 80px;
-            max-width: 1200px;
-            margin: 0 auto;
-            gap: 60px;
-        }
-        .hero-content { flex: 1; }
-        .hero-visual { flex: 0 0 320px; }
-
-        .hero h1 {
-            font-size: 56px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--cyan), var(--blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-        .hero h1 img { width: 56px; height: 56px; -webkit-text-fill-color: initial; }
-
-        .hero .tagline {
-            font-size: 20px;
-            color: var(--muted);
-            margin-bottom: 24px;
+        html{scroll-behavior:smooth}
+        body{
+            font-family:'Outfit',sans-serif;
+            background:var(--dark);
+            color:var(--text);
+            line-height:1.6;
+            overflow-x:hidden;
         }
 
-        .badges {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 32px;
-            flex-wrap: wrap;
+        ::selection{background:rgba(0,212,255,0.25);color:white}
+        a{color:var(--cyan);text-decoration:none;transition:all 0.3s}
+        a:hover{color:white}
+
+        /* ===== CANVAS BACKGROUND ===== */
+        #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+        /* ===== GRADIENT ORBS ===== */
+        .orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0;opacity:0.4}
+        .orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,0.12),transparent 70%);top:-200px;right:-200px;animation:orbFloat 20s ease-in-out infinite}
+        .orb-2{width:500px;height:500px;background:radial-gradient(circle,rgba(51,102,255,0.1),transparent 70%);bottom:-150px;left:-150px;animation:orbFloat 25s ease-in-out infinite reverse}
+        .orb-3{width:400px;height:400px;background:radial-gradient(circle,rgba(124,58,237,0.08),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:orbFloat 18s ease-in-out infinite}
+        @keyframes orbFloat{0%,100%{transform:translate(0,0)}25%{transform:translate(30px,-40px)}50%{transform:translate(-20px,30px)}75%{transform:translate(40px,20px)}}
+
+        /* ===== NAV ===== */
+        nav{
+            position:fixed;top:0;width:100%;padding:0 48px;height:64px;
+            display:flex;align-items:center;justify-content:space-between;
+            background:rgba(6,6,11,0.6);backdrop-filter:blur(24px) saturate(1.4);
+            border-bottom:1px solid var(--border);z-index:1000;
+            transition:all 0.3s;
         }
-        .badge {
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            border: 1px solid var(--border);
-            background: var(--card);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        nav.scrolled{background:rgba(6,6,11,0.9);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+        .nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:white;letter-spacing:-0.02em}
+        .nav-logo img{width:26px;height:26px}
+        .nav-links{display:flex;gap:8px}
+        .nav-links a{
+            color:var(--muted);font-size:13px;font-weight:500;padding:6px 14px;
+            border-radius:8px;transition:all 0.25s;letter-spacing:0.01em;
         }
-        .badge .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--cyan);
+        .nav-links a:hover{color:var(--white);background:rgba(255,255,255,0.05)}
+
+        /* ===== REVEAL ANIMATIONS ===== */
+        .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+        .reveal-delay-1{transition-delay:0.1s}
+        .reveal-delay-2{transition-delay:0.2s}
+        .reveal-delay-3{transition-delay:0.3s}
+        .reveal-delay-4{transition-delay:0.4s}
+        .reveal-delay-5{transition-delay:0.5s}
+
+        /* ===== HERO ===== */
+        .hero{
+            min-height:100vh;display:flex;align-items:center;
+            padding:120px 48px 80px;max-width:1240px;margin:0 auto;
+            gap:80px;position:relative;z-index:1;
+        }
+        .hero-content{flex:1;position:relative}
+        .hero-visual{flex:0 0 340px;position:relative}
+
+        .hero-eyebrow{
+            display:inline-flex;align-items:center;gap:8px;
+            padding:6px 14px 6px 8px;border-radius:100px;
+            background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.12);
+            font-size:12px;font-weight:600;color:var(--cyan);
+            letter-spacing:0.06em;text-transform:uppercase;
+            margin-bottom:24px;
+        }
+        .hero-eyebrow .pulse{
+            width:8px;height:8px;border-radius:50%;background:var(--cyan);
+            animation:pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+
+        .hero h1{
+            font-size:clamp(40px,5.5vw,64px);font-weight:800;
+            color:var(--white);line-height:1.05;letter-spacing:-0.035em;
+            margin-bottom:20px;
+        }
+        .hero h1 .gradient{
+            background:linear-gradient(135deg,var(--cyan) 0%,var(--blue) 50%,var(--purple) 100%);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-size:200% 200%;animation:gradientShift 6s ease-in-out infinite;
+        }
+        @keyframes gradientShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+        .hero .tagline{
+            font-size:18px;color:var(--muted);margin-bottom:32px;
+            font-weight:400;max-width:460px;line-height:1.7;
+        }
+        .typing-cursor{
+            display:inline-block;width:2px;height:1.1em;background:var(--cyan);
+            vertical-align:text-bottom;margin-left:2px;
+            animation:blink 1s steps(1) infinite;
+        }
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+        .badges{display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap}
+        .badge{
+            padding:5px 12px;border-radius:6px;font-size:11px;font-weight:600;
+            border:1px solid var(--border);background:var(--surface);
+            color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;
+            transition:all 0.3s;
+        }
+        .badge:hover{border-color:rgba(0,212,255,0.2);color:var(--cyan)}
+
+        .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+        .btn-primary{
+            display:inline-flex;align-items:center;gap:8px;
+            padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;
+            background:white;color:#0a0a0f;
+            transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
+            box-shadow:0 0 0 1px rgba(255,255,255,0.1);
+        }
+        .btn-primary:hover{
+            transform:translateY(-2px);color:#0a0a0f;
+            box-shadow:0 8px 40px rgba(0,212,255,0.2),0 0 0 1px rgba(255,255,255,0.2);
+        }
+        .btn-primary svg{width:18px;height:18px}
+
+        .btn-secondary{
+            display:inline-flex;align-items:center;gap:8px;
+            padding:12px 24px;border-radius:10px;font-size:14px;font-weight:600;
+            background:transparent;color:var(--text);
+            border:1px solid var(--border);transition:all 0.3s;
+        }
+        .btn-secondary:hover{border-color:rgba(0,212,255,0.3);color:white;background:rgba(0,212,255,0.05)}
+
+        /* Phone mockup */
+        .phone-wrap{position:relative}
+        .phone-glow{
+            position:absolute;inset:-40px;
+            background:radial-gradient(ellipse at center,rgba(0,212,255,0.08),transparent 70%);
+            border-radius:50%;z-index:0;
+        }
+        .phone-frame{
+            position:relative;z-index:1;
+            background:linear-gradient(145deg,#18182a,#0e0e18);
+            border-radius:36px;padding:10px;
+            border:1px solid rgba(255,255,255,0.08);
+            box-shadow:0 40px 80px -20px rgba(0,0,0,0.6),0 0 60px rgba(0,212,255,0.05);
+            transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);
+        }
+        .phone-frame:hover{transform:translateY(-8px) rotateX(2deg)}
+        .phone-frame img{width:100%;border-radius:26px;display:block}
+
+        /* ===== MARQUEE ===== */
+        .marquee-section{
+            border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+            padding:14px 0;overflow:hidden;position:relative;z-index:1;
+            background:rgba(6,6,11,0.5);
+        }
+        .marquee-track{display:flex;animation:marquee 40s linear infinite;gap:32px;width:max-content}
+        .marquee-item{
+            display:flex;align-items:center;gap:10px;white-space:nowrap;
+            font-size:12px;font-weight:600;text-transform:uppercase;
+            letter-spacing:0.1em;color:var(--muted);
+            font-family:'JetBrains Mono',monospace;
+        }
+        .marquee-item .dot{width:4px;height:4px;border-radius:50%;background:var(--cyan)}
+        @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        /* ===== FEATURES ===== */
+        .features{padding:120px 48px;max-width:1240px;margin:0 auto;position:relative;z-index:1}
+        .section-label{
+            display:inline-flex;align-items:center;gap:6px;
+            font-size:11px;font-weight:700;color:var(--cyan);
+            letter-spacing:0.12em;text-transform:uppercase;
+            font-family:'JetBrains Mono',monospace;
+            margin-bottom:16px;
+        }
+        .section-label::before{content:'';width:20px;height:1px;background:var(--cyan)}
+        .features h2{
+            font-size:clamp(28px,3.5vw,42px);font-weight:700;
+            color:var(--white);margin-bottom:16px;letter-spacing:-0.025em;
+        }
+        .features .section-desc{color:var(--muted);max-width:500px;margin-bottom:56px;font-size:16px}
+
+        .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .feature-card{
+            position:relative;padding:32px;border-radius:16px;
+            background:var(--card);border:1px solid var(--border);
+            transition:all 0.4s cubic-bezier(0.16,1,0.3,1);
+            overflow:hidden;
+        }
+        .feature-card::before{
+            content:'';position:absolute;inset:0;border-radius:16px;
+            padding:1px;
+            background:linear-gradient(135deg,rgba(0,212,255,0),rgba(0,212,255,0),rgba(0,212,255,0));
+            -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+            -webkit-mask-composite:xor;mask-composite:exclude;
+            transition:all 0.4s;pointer-events:none;
+        }
+        .feature-card:hover{transform:translateY(-4px);background:#12122000}
+        .feature-card:hover::before{
+            background:linear-gradient(135deg,var(--cyan),var(--blue),var(--purple));
+            opacity:0.4;
+        }
+        .feature-card .glow-dot{
+            position:absolute;top:0;right:0;width:120px;height:120px;
+            background:radial-gradient(circle,var(--glow),transparent 70%);
+            opacity:0;transition:opacity 0.4s;pointer-events:none;
+        }
+        .feature-card:hover .glow-dot{opacity:1}
+        .feature-icon{
+            width:44px;height:44px;border-radius:12px;
+            background:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(51,102,255,0.08));
+            border:1px solid rgba(0,212,255,0.1);
+            display:flex;align-items:center;justify-content:center;
+            margin-bottom:20px;font-size:20px;
+        }
+        .feature-card h3{font-size:15px;font-weight:700;margin-bottom:10px;color:var(--white);letter-spacing:-0.01em}
+        .feature-card p{font-size:13px;color:var(--muted);line-height:1.65}
+
+        /* ===== LEGAL SECTIONS ===== */
+        .legal{
+            padding:80px 48px;max-width:800px;margin:0 auto;
+            position:relative;z-index:1;
+        }
+        .legal h2{
+            font-size:28px;font-weight:700;color:var(--white);
+            margin-bottom:8px;letter-spacing:-0.02em;
+        }
+        .legal .updated{font-size:13px;color:var(--muted);margin-bottom:32px;font-family:'JetBrains Mono',monospace}
+        .legal h3{font-size:15px;font-weight:700;color:var(--white);margin:28px 0 8px}
+        .legal p,.legal li{font-size:14px;color:var(--muted);line-height:1.75}
+        .legal ul{padding-left:20px;margin:8px 0}
+        .legal li{margin-bottom:4px}
+        .legal-divider{width:100%;height:1px;background:var(--border);margin:60px 0}
+        .legal-links{
+            display:flex;gap:8px;margin-bottom:40px;
+        }
+        .legal-link{
+            padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;
+            color:var(--muted);background:var(--surface);border:1px solid var(--border);
+            transition:all 0.25s;
+        }
+        .legal-link:hover,.legal-link.active{color:var(--cyan);border-color:rgba(0,212,255,0.2);background:rgba(0,212,255,0.05)}
+
+        /* ===== FOOTER ===== */
+        footer{
+            border-top:1px solid var(--border);
+            padding:48px;max-width:1240px;margin:0 auto;
+            position:relative;z-index:1;
+        }
+        .footer-grid{
+            display:grid;grid-template-columns:1fr auto auto;gap:48px;
+            align-items:start;margin-bottom:40px;
+        }
+        .footer-brand .footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+        .footer-brand .footer-logo img{width:28px;height:28px}
+        .footer-brand .footer-logo span{font-size:16px;font-weight:700;color:white}
+        .footer-brand p{font-size:13px;color:var(--muted);max-width:260px;line-height:1.6}
+        .footer-col h4{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;font-family:'JetBrains Mono',monospace}
+        .footer-col a{display:block;font-size:13px;color:var(--muted);padding:4px 0;transition:color 0.2s}
+        .footer-col a:hover{color:white}
+
+        .footer-bottom{
+            display:flex;justify-content:space-between;align-items:center;
+            padding-top:24px;border-top:1px solid var(--border);
+        }
+        .footer-bottom p{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+        .footer-social{display:flex;gap:8px}
+        .footer-social a{
+            width:34px;height:34px;border-radius:8px;
+            border:1px solid var(--border);background:var(--surface);
+            display:flex;align-items:center;justify-content:center;
+            color:var(--muted);transition:all 0.25s;
+        }
+        .footer-social a:hover{border-color:rgba(0,212,255,0.3);color:white;background:rgba(0,212,255,0.05)}
+        .footer-social svg{width:14px;height:14px;fill:currentColor}
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:900px){
+            .features-grid{grid-template-columns:repeat(2,1fr)}
+            .footer-grid{grid-template-columns:1fr;gap:32px}
+        }
+        @media(max-width:768px){
+            nav{padding:0 20px}
+            .nav-links{display:none}
+            .hero{flex-direction:column;padding:100px 20px 60px;text-align:center;gap:48px}
+            .hero h1{font-size:36px}
+            .badges{justify-content:center}
+            .hero .tagline{margin:0 auto 32px}
+            .hero-actions{justify-content:center}
+            .hero-visual{flex:0 0 auto;width:280px}
+            .features{padding:80px 20px}
+            .features-grid{grid-template-columns:1fr}
+            .legal{padding:60px 20px}
+            footer{padding:32px 20px}
+            .footer-bottom{flex-direction:column;gap:16px;text-align:center}
         }
 
-        .hero-desc {
-            font-size: 16px;
-            color: var(--muted);
-            max-width: 500px;
-            margin-bottom: 40px;
-            line-height: 1.7;
+        /* ===== NOISE OVERLAY ===== */
+        body::after{
+            content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+            background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            opacity:0.4;
         }
-
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            background: white;
-            color: black;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.15);
-            opacity: 1;
-        }
-        .cta-btn svg { width: 20px; height: 20px; }
-
-        .phone-frame {
-            background: var(--card);
-            border-radius: 32px;
-            border: 2px solid var(--border);
-            padding: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-        .phone-frame img {
-            width: 100%;
-            border-radius: 22px;
-            display: block;
-        }
-
-        /* Marquee */
-        .marquee-section {
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 0;
-            overflow: hidden;
-        }
-        .marquee-track {
-            display: flex;
-            animation: marquee 30s linear infinite;
-            gap: 48px;
-            width: max-content;
-        }
-        .marquee-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--muted);
-        }
-        .marquee-item .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* Features */
-        .features {
-            padding: 100px 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .features h2 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 48px;
-            text-align: center;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .feature-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 28px;
-            transition: border-color 0.3s, transform 0.2s;
-        }
-        .feature-card:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            transform: translateY(-4px);
-        }
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(51, 102, 255, 0.15));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 16px;
-            font-size: 20px;
-        }
-        .feature-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: white; }
-        .feature-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
-
-        /* Privacy & Terms */
-        .legal {
-            padding: 80px 40px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .legal h2 {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 32px;
-        }
-        .legal h3 {
-            font-size: 18px;
-            font-weight: 600;
-            color: white;
-            margin: 24px 0 8px;
-        }
-        .legal p, .legal li {
-            font-size: 15px;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-        .legal ul { padding-left: 20px; margin: 8px 0; }
-        .legal li { margin-bottom: 4px; }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .footer-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .footer-left img { width: 24px; height: 24px; }
-        .footer-left span { font-size: 14px; color: var(--muted); }
-        .footer-links { display: flex; gap: 24px; }
-        .footer-links a { color: var(--muted); font-size: 14px; }
-        .footer-links a:hover { color: white; }
-        .footer-social { display: flex; gap: 16px; }
-        .footer-social a {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--muted);
-            transition: border-color 0.2s, color 0.2s;
-        }
-        .footer-social a:hover { border-color: var(--cyan); color: white; }
-        .footer-social svg { width: 16px; height: 16px; fill: currentColor; }
-        .footer-bottom {
-            margin-top: 24px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border);
-            text-align: center;
-            font-size: 13px;
-            color: var(--muted);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav { padding: 14px 20px; }
-            .nav-links { display: none; }
-            .hero { flex-direction: column; padding: 100px 20px 60px; text-align: center; }
-            .hero h1 { font-size: 36px; justify-content: center; }
-            .hero h1 img { width: 40px; height: 40px; }
-            .badges { justify-content: center; }
-            .hero-desc { margin: 0 auto 40px; }
-            .hero-visual { flex: 0 0 auto; width: 260px; }
-            .features { padding: 60px 20px; }
-            .legal { padding: 60px 20px; }
-            footer { padding: 30px 20px; }
-            .footer-content { flex-direction: column; text-align: center; }
-        }
-
-        /* Smooth scroll */
-        html { scroll-behavior: smooth; }
-        section { scroll-margin-top: 80px; }
     </style>
 </head>
 <body>
 
+<!-- Gradient orbs -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- Particles -->
+<canvas id="particles"></canvas>
+
 <!-- Nav -->
-<nav>
+<nav id="nav">
     <div class="nav-logo">
         <img src="assets/logo.png" alt="Scowld">
         Scowld
@@ -333,30 +350,36 @@
 <!-- Hero -->
 <section class="hero" id="home">
     <div class="hero-content">
-        <h1>
-            <img src="assets/logo.png" alt="">
-            Scowld
-        </h1>
-        <p class="tagline">Your AI Companion</p>
-        <div class="badges">
-            <span class="badge"><span class="dot"></span> AI-Powered</span>
-            <span class="badge"><span class="dot"></span> iOS App</span>
-            <span class="badge"><span class="dot"></span> Privacy First</span>
-            <span class="badge"><span class="dot"></span> Open Source</span>
+        <div class="hero-eyebrow reveal">
+            <span class="pulse"></span>
+            Open Source &middot; MIT License
         </div>
-        <p class="hero-desc">
-            Meet your AI companion with a 3D anime avatar. Talk hands-free with voice chat,
-            let it see through your camera, and build a relationship that remembers.
-            Powered by your choice of AI — Gemini, OpenAI, Claude, and more.
+        <h1 class="reveal reveal-delay-1">
+            Meet <span class="gradient">Scowld</span>
+        </h1>
+        <p class="tagline reveal reveal-delay-2">
+            <span id="typed"></span><span class="typing-cursor"></span>
         </p>
-        <a href="https://github.com/apoorvdarshan/scowld" class="cta-btn" target="_blank">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            View on GitHub
-        </a>
+        <div class="badges reveal reveal-delay-3">
+            <span class="badge">AI-Powered</span>
+            <span class="badge">iOS App</span>
+            <span class="badge">Privacy First</span>
+            <span class="badge">Open Source</span>
+        </div>
+        <div class="hero-actions reveal reveal-delay-4">
+            <a href="https://github.com/apoorvdarshan/scowld" class="btn-primary" target="_blank">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                View on GitHub
+            </a>
+            <a href="#features" class="btn-secondary">Explore Features</a>
+        </div>
     </div>
-    <div class="hero-visual">
-        <div class="phone-frame">
-            <img src="assets/screenshot.png" alt="Scowld App Screenshot">
+    <div class="hero-visual reveal reveal-delay-3">
+        <div class="phone-wrap">
+            <div class="phone-glow"></div>
+            <div class="phone-frame">
+                <img src="assets/screenshot.png" alt="Scowld App">
+            </div>
         </div>
     </div>
 </section>
@@ -364,162 +387,245 @@
 <!-- Marquee -->
 <div class="marquee-section">
     <div class="marquee-track">
-        <span class="marquee-item"><span class="dot"></span> HANDS-FREE VOICE</span>
-        <span class="marquee-item"><span class="dot"></span> 3D ANIME AVATAR</span>
-        <span class="marquee-item"><span class="dot"></span> VISION CAPABLE</span>
-        <span class="marquee-item"><span class="dot"></span> PERSISTENT MEMORY</span>
-        <span class="marquee-item"><span class="dot"></span> MULTI-PROVIDER LLM</span>
-        <span class="marquee-item"><span class="dot"></span> ON-DEVICE SPEECH</span>
-        <span class="marquee-item"><span class="dot"></span> ELEVENLABS TTS</span>
-        <span class="marquee-item"><span class="dot"></span> OPEN SOURCE</span>
-        <span class="marquee-item"><span class="dot"></span> HANDS-FREE VOICE</span>
-        <span class="marquee-item"><span class="dot"></span> 3D ANIME AVATAR</span>
-        <span class="marquee-item"><span class="dot"></span> VISION CAPABLE</span>
-        <span class="marquee-item"><span class="dot"></span> PERSISTENT MEMORY</span>
-        <span class="marquee-item"><span class="dot"></span> MULTI-PROVIDER LLM</span>
-        <span class="marquee-item"><span class="dot"></span> ON-DEVICE SPEECH</span>
-        <span class="marquee-item"><span class="dot"></span> ELEVENLABS TTS</span>
-        <span class="marquee-item"><span class="dot"></span> OPEN SOURCE</span>
+        <span class="marquee-item"><span class="dot"></span>HANDS-FREE VOICE</span>
+        <span class="marquee-item"><span class="dot"></span>3D ANIME AVATAR</span>
+        <span class="marquee-item"><span class="dot"></span>VISION CAPABLE</span>
+        <span class="marquee-item"><span class="dot"></span>PERSISTENT MEMORY</span>
+        <span class="marquee-item"><span class="dot"></span>MULTI-PROVIDER LLM</span>
+        <span class="marquee-item"><span class="dot"></span>ON-DEVICE SPEECH</span>
+        <span class="marquee-item"><span class="dot"></span>ELEVENLABS TTS</span>
+        <span class="marquee-item"><span class="dot"></span>OPEN SOURCE</span>
+        <span class="marquee-item"><span class="dot"></span>HANDS-FREE VOICE</span>
+        <span class="marquee-item"><span class="dot"></span>3D ANIME AVATAR</span>
+        <span class="marquee-item"><span class="dot"></span>VISION CAPABLE</span>
+        <span class="marquee-item"><span class="dot"></span>PERSISTENT MEMORY</span>
+        <span class="marquee-item"><span class="dot"></span>MULTI-PROVIDER LLM</span>
+        <span class="marquee-item"><span class="dot"></span>ON-DEVICE SPEECH</span>
+        <span class="marquee-item"><span class="dot"></span>ELEVENLABS TTS</span>
+        <span class="marquee-item"><span class="dot"></span>OPEN SOURCE</span>
     </div>
 </div>
 
 <!-- Features -->
 <section class="features" id="features">
-    <h2>Features</h2>
+    <div class="section-label reveal">Features</div>
+    <h2 class="reveal reveal-delay-1">Everything you need in<br>an AI companion</h2>
+    <p class="section-desc reveal reveal-delay-2">Built for natural conversation. Designed for privacy. Open for everyone.</p>
     <div class="features-grid">
-        <div class="feature-card">
-            <div class="feature-icon">&#x1f5e3;</div>
+        <div class="feature-card reveal">
+            <div class="glow-dot"></div>
+            <div class="feature-icon">&#x1f399;</div>
             <h3>Hands-Free Voice Chat</h3>
-            <p>Always-on speech recognition. Just talk naturally and your message auto-sends after a brief pause. Live captions show what you and the AI are saying.</p>
+            <p>Always-on speech recognition. Talk naturally and your message auto-sends after a brief pause. Live captions for both sides.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#x1f9d1;&#x200d;&#x1f3a4;</div>
+        <div class="feature-card reveal reveal-delay-1">
+            <div class="glow-dot"></div>
+            <div class="feature-icon">&#x2728;</div>
             <h3>3D Anime Avatar</h3>
-            <p>A fully animated VRM character with lip sync, idle animations, and expressions. Powered by Three.js and Amica's open-source avatar engine.</p>
+            <p>Fully animated VRM character with lip sync, idle animations, and expressions. Powered by Three.js and Amica.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal reveal-delay-2">
+            <div class="glow-dot"></div>
             <div class="feature-icon">&#x1f441;</div>
             <h3>Vision</h3>
-            <p>Front camera feeds to the AI so it can see what you see. No preview shown by default for a clean, privacy-first experience.</p>
+            <p>Front camera feeds to the AI so it can see what you see. No preview shown by default. Privacy-first design.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal reveal-delay-3">
+            <div class="glow-dot"></div>
             <div class="feature-icon">&#x1f9e0;</div>
             <h3>Persistent Memory</h3>
-            <p>The AI extracts and remembers key details from your conversations. It builds context over time so interactions feel personal.</p>
+            <p>AI extracts and remembers key details across conversations. Builds context over time for personal interactions.</p>
         </div>
-        <div class="feature-card">
-            <div class="feature-icon">&#x1f504;</div>
+        <div class="feature-card reveal reveal-delay-4">
+            <div class="glow-dot"></div>
+            <div class="feature-icon">&#x26a1;</div>
             <h3>Multi-Provider LLM</h3>
-            <p>Choose your AI brain: Gemini, OpenAI, Claude, Ollama, OpenRouter, xAI, or Together AI. Switch anytime in settings.</p>
+            <p>Choose your AI brain: Gemini, OpenAI, Claude, Ollama, OpenRouter, xAI, or Together AI. Switch anytime.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal reveal-delay-5">
+            <div class="glow-dot"></div>
             <div class="feature-icon">&#x1f50a;</div>
             <h3>Premium TTS</h3>
-            <p>Hear your companion speak with ElevenLabs, OpenAI TTS, or native iOS voices. Natural and expressive text-to-speech.</p>
+            <p>ElevenLabs, OpenAI TTS, or native iOS voices. Natural and expressive text-to-speech that brings your companion to life.</p>
         </div>
     </div>
 </section>
 
-<!-- Privacy Policy -->
+<!-- Privacy -->
 <section class="legal" id="privacy">
-    <h2>Privacy Policy</h2>
-    <p><em>Last updated: March 16, 2026</em></p>
+    <div class="legal-links">
+        <a href="#privacy" class="legal-link active">Privacy Policy</a>
+        <a href="#terms" class="legal-link">Terms of Service</a>
+    </div>
+    <h2 class="reveal">Privacy Policy</h2>
+    <p class="updated reveal">Last updated: March 16, 2026</p>
 
-    <h3>Overview</h3>
-    <p>Scowld is designed with privacy in mind. Your data stays on your device unless you explicitly choose to use cloud AI providers.</p>
+    <div class="reveal">
+        <h3>Overview</h3>
+        <p>Scowld is designed with privacy in mind. Your data stays on your device unless you explicitly choose to use cloud AI providers.</p>
 
-    <h3>Data Collection</h3>
-    <p>Scowld does <strong>not</strong> collect, store, or transmit any personal data to our servers. We do not have servers. The app runs entirely on your device.</p>
+        <h3>Data Collection</h3>
+        <p>Scowld does <strong style="color:var(--white)">not</strong> collect, store, or transmit any personal data to our servers. We do not have servers. The app runs entirely on your device.</p>
 
-    <h3>Third-Party Services</h3>
-    <p>When you configure an AI provider (Gemini, OpenAI, Claude, etc.), your messages are sent to that provider's API for processing. This is governed by their respective privacy policies:</p>
-    <ul>
-        <li>Google Gemini: <a href="https://ai.google.dev/terms" target="_blank">ai.google.dev/terms</a></li>
-        <li>OpenAI: <a href="https://openai.com/policies/privacy-policy" target="_blank">openai.com/policies/privacy-policy</a></li>
-        <li>Anthropic (Claude): <a href="https://www.anthropic.com/privacy" target="_blank">anthropic.com/privacy</a></li>
-        <li>ElevenLabs: <a href="https://elevenlabs.io/privacy" target="_blank">elevenlabs.io/privacy</a></li>
-    </ul>
+        <h3>Third-Party Services</h3>
+        <p>When you configure an AI provider, your messages are sent to that provider's API. This is governed by their privacy policies:</p>
+        <ul>
+            <li>Google Gemini: <a href="https://ai.google.dev/terms" target="_blank">ai.google.dev/terms</a></li>
+            <li>OpenAI: <a href="https://openai.com/policies/privacy-policy" target="_blank">openai.com/policies/privacy-policy</a></li>
+            <li>Anthropic (Claude): <a href="https://www.anthropic.com/privacy" target="_blank">anthropic.com/privacy</a></li>
+            <li>ElevenLabs: <a href="https://elevenlabs.io/privacy" target="_blank">elevenlabs.io/privacy</a></li>
+        </ul>
 
-    <h3>Camera &amp; Microphone</h3>
-    <p>Camera and microphone data is processed on-device for speech recognition (Apple Speech framework) and sent to your configured AI provider only when you send a message. No audio or video is stored or transmitted elsewhere.</p>
+        <h3>Camera &amp; Microphone</h3>
+        <p>Camera and microphone data is processed on-device for speech recognition and sent to your configured AI provider only when you send a message. No audio or video is stored or transmitted elsewhere.</p>
 
-    <h3>API Keys</h3>
-    <p>Your API keys are stored securely in the iOS Keychain on your device. They are never transmitted to us or any third party other than the respective AI provider.</p>
+        <h3>API Keys</h3>
+        <p>Your API keys are stored securely in the iOS Keychain on your device. They are never transmitted to us or any third party other than the respective AI provider.</p>
 
-    <h3>Local Storage</h3>
-    <p>Chat history and memories are stored locally on your device using CoreData. You can clear all data at any time from Settings.</p>
+        <h3>Local Storage</h3>
+        <p>Chat history and memories are stored locally on your device using CoreData. You can clear all data at any time from Settings.</p>
 
-    <h3>Contact</h3>
-    <p>For privacy concerns, contact: <a href="mailto:ad13dtu@gmail.com">ad13dtu@gmail.com</a></p>
+        <h3>Contact</h3>
+        <p>For privacy concerns: <a href="mailto:ad13dtu@gmail.com">ad13dtu@gmail.com</a></p>
+    </div>
 </section>
 
-<!-- Terms of Service -->
+<div class="legal-divider" style="max-width:800px;margin:0 auto"></div>
+
+<!-- Terms -->
 <section class="legal" id="terms">
-    <h2>Terms of Service</h2>
-    <p><em>Last updated: March 16, 2026</em></p>
+    <h2 class="reveal">Terms of Service</h2>
+    <p class="updated reveal">Last updated: March 16, 2026</p>
 
-    <h3>Acceptance</h3>
-    <p>By using Scowld, you agree to these terms. If you do not agree, do not use the app.</p>
+    <div class="reveal">
+        <h3>Acceptance</h3>
+        <p>By using Scowld, you agree to these terms. If you do not agree, do not use the app.</p>
 
-    <h3>Description</h3>
-    <p>Scowld is an open-source AI companion app that provides conversational AI through third-party providers. It is provided "as is" without warranties of any kind.</p>
+        <h3>Description</h3>
+        <p>Scowld is an open-source AI companion app that provides conversational AI through third-party providers. It is provided "as is" without warranties of any kind.</p>
 
-    <h3>Your Responsibilities</h3>
-    <ul>
-        <li>You are responsible for your own API keys and any charges from AI providers.</li>
-        <li>You must comply with the terms of service of any third-party AI provider you use.</li>
-        <li>You must not use the app for any illegal or harmful purposes.</li>
-    </ul>
+        <h3>Your Responsibilities</h3>
+        <ul>
+            <li>You are responsible for your own API keys and any charges from AI providers.</li>
+            <li>You must comply with the terms of service of any third-party AI provider you use.</li>
+            <li>You must not use the app for any illegal or harmful purposes.</li>
+        </ul>
 
-    <h3>Limitations</h3>
-    <ul>
-        <li>AI responses may be inaccurate. Do not rely on them for medical, legal, or financial advice.</li>
-        <li>We are not responsible for any costs incurred through third-party API usage.</li>
-        <li>The app requires an internet connection for AI features (except on-device speech recognition).</li>
-    </ul>
+        <h3>Limitations</h3>
+        <ul>
+            <li>AI responses may be inaccurate. Do not rely on them for medical, legal, or financial advice.</li>
+            <li>We are not responsible for any costs incurred through third-party API usage.</li>
+            <li>The app requires an internet connection for AI features.</li>
+        </ul>
 
-    <h3>Open Source</h3>
-    <p>Scowld is released under the MIT License. You are free to use, modify, and distribute the source code in accordance with the license terms.</p>
+        <h3>Open Source</h3>
+        <p>Scowld is released under the MIT License. You are free to use, modify, and distribute the source code in accordance with the license terms.</p>
 
-    <h3>Changes</h3>
-    <p>We may update these terms at any time. Continued use of the app constitutes acceptance of the updated terms.</p>
-
-    <h3>Contact</h3>
-    <p>Questions about these terms? Contact: <a href="mailto:ad13dtu@gmail.com">ad13dtu@gmail.com</a></p>
+        <h3>Contact</h3>
+        <p>Questions? <a href="mailto:ad13dtu@gmail.com">ad13dtu@gmail.com</a></p>
+    </div>
 </section>
 
 <!-- Footer -->
 <footer>
-    <div class="footer-content">
-        <div class="footer-left">
-            <img src="assets/logo.png" alt="Scowld">
-            <span>Scowld</span>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="footer-logo">
+                <img src="assets/logo.png" alt="Scowld">
+                <span>Scowld</span>
+            </div>
+            <p>Open-source AI companion with a 3D anime avatar, hands-free voice, vision, and persistent memory.</p>
         </div>
-        <div class="footer-links">
+        <div class="footer-col">
+            <h4>Product</h4>
             <a href="#features">Features</a>
-            <a href="#privacy">Privacy</a>
-            <a href="#terms">Terms</a>
             <a href="https://github.com/apoorvdarshan/scowld" target="_blank">GitHub</a>
+            <a href="https://github.com/apoorvdarshan/scowld/blob/main/CONTRIBUTING.md" target="_blank">Contribute</a>
         </div>
+        <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+            <a href="https://github.com/apoorvdarshan/scowld/blob/main/LICENSE" target="_blank">MIT License</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Apoorv Darshan</p>
         <div class="footer-social">
-            <!-- Email -->
             <a href="mailto:ad13dtu@gmail.com" title="Email">
                 <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
             </a>
-            <!-- X (Twitter) -->
             <a href="https://x.com/apoorvdarshan" target="_blank" title="X">
                 <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
-            <!-- LinkedIn -->
             <a href="https://linkedin.com/in/apoorvdarshan" target="_blank" title="LinkedIn">
                 <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </a>
         </div>
     </div>
-    <div class="footer-bottom">
-        &copy; 2026 Apoorv Darshan. All rights reserved. &middot; <a href="mailto:ad13dtu@gmail.com">ad13dtu@gmail.com</a>
-    </div>
 </footer>
 
+<script>
+// Particles
+(function(){
+    const c=document.getElementById('particles'),x=c.getContext('2d');
+    let w,h,pts=[];
+    function resize(){w=c.width=innerWidth;h=c.height=innerHeight;pts=[];
+        for(let i=0;i<60;i++)pts.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,r:Math.random()*1.5+0.5,o:Math.random()*0.3+0.1});
+    }
+    function draw(){
+        x.clearRect(0,0,w,h);
+        pts.forEach(p=>{
+            p.x+=p.vx;p.y+=p.vy;
+            if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+            x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);
+            x.fillStyle=`rgba(0,212,255,${p.o})`;x.fill();
+        });
+        // Draw lines between close particles
+        for(let i=0;i<pts.length;i++){
+            for(let j=i+1;j<pts.length;j++){
+                const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+                if(d<150){
+                    x.beginPath();x.moveTo(pts[i].x,pts[i].y);x.lineTo(pts[j].x,pts[j].y);
+                    x.strokeStyle=`rgba(0,212,255,${0.03*(1-d/150)})`;x.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(draw);
+    }
+    resize();draw();addEventListener('resize',resize);
+})();
+
+// Scroll reveal
+const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Nav scroll
+let lastScroll=0;
+addEventListener('scroll',()=>{
+    document.getElementById('nav').classList.toggle('scrolled',scrollY>50);
+});
+
+// Typing animation
+const phrases=["Your AI companion with a 3D anime avatar.","Talk hands-free. See through your camera.","A relationship that remembers.","Powered by Gemini, OpenAI, Claude & more."];
+let pi=0,ci=0,deleting=false;
+function type(){
+    const el=document.getElementById('typed');
+    if(!el)return;
+    const phrase=phrases[pi];
+    if(!deleting){
+        el.textContent=phrase.substring(0,ci+1);ci++;
+        if(ci===phrase.length){deleting=true;setTimeout(type,2000);return}
+        setTimeout(type,40);
+    }else{
+        el.textContent=phrase.substring(0,ci-1);ci--;
+        if(ci===0){deleting=false;pi=(pi+1)%phrases.length;setTimeout(type,400);return}
+        setTimeout(type,20);
+    }
+}
+setTimeout(type,800);
+</script>
 </body>
 </html>

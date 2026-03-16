@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Scowld</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--cyan:#00d4ff;--dark:#06060b;--surface:#0d0d14;--border:rgba(255,255,255,0.06);--text:#c8cdd5;--muted:#4a5568;--white:#f0f2f5}
+        html{scroll-behavior:smooth}
+        body{font-family:'Outfit',sans-serif;background:var(--dark);color:var(--text);line-height:1.6;overflow-x:hidden}
+        ::selection{background:rgba(0,212,255,0.25);color:white}
+        a{color:var(--cyan);text-decoration:none;transition:all 0.3s}a:hover{color:white}
+        nav{position:fixed;top:0;width:100%;padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,6,11,0.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);z-index:100}
+        .nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:white;text-decoration:none}
+        .nav-logo img{width:26px;height:26px}
+        .content{max-width:720px;margin:0 auto;padding:120px 24px 80px}
+        .back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);margin-bottom:32px;font-family:'JetBrains Mono',monospace}
+        .back:hover{color:var(--cyan)}
+        h1{font-size:32px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:-0.02em}
+        .updated{font-size:13px;color:var(--muted);margin-bottom:40px;font-family:'JetBrains Mono',monospace}
+        h2{font-size:18px;font-weight:700;color:var(--white);margin:32px 0 10px}
+        p,li{font-size:15px;color:var(--muted);line-height:1.75}
+        ul{padding-left:20px;margin:8px 0}li{margin-bottom:4px}
+        strong{color:var(--white)}
+        @media(max-width:768px){nav{padding:0 20px}.content{padding:100px 20px 60px}}
+    </style>
+</head>
+<body>
+<nav><a class="nav-logo" href="/"><img src="assets/logo.png" alt="">Scowld</a></nav>
+<div class="content">
+    <a href="/" class="back">&larr; Back to home</a>
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: March 16, 2026</p>
+    <h2>Overview</h2><p>Scowld is designed with privacy in mind. Your data stays on your device unless you explicitly choose to use cloud AI providers.</p>
+    <h2>Data Collection</h2><p>Scowld does <strong>not</strong> collect, store, or transmit any personal data to our servers. We do not have servers. The app runs entirely on your device.</p>
+    <h2>Third-Party Services</h2><p>When you configure an AI provider, your messages are sent to that provider's API:</p>
+    <ul><li>Google Gemini: <a href="https://ai.google.dev/terms" target="_blank">ai.google.dev/terms</a></li><li>OpenAI: <a href="https://openai.com/policies/privacy-policy" target="_blank">openai.com/policies/privacy-policy</a></li><li>Anthropic (Claude): <a href="https://www.anthropic.com/privacy" target="_blank">anthropic.com/privacy</a></li><li>ElevenLabs: <a href="https://elevenlabs.io/privacy" target="_blank">elevenlabs.io/privacy</a></li></ul>
+    <h2>Camera &amp; Microphone</h2><p>Camera and microphone data is processed on-device for speech recognition and sent to your configured AI provider only when you send a message.</p>
+    <h2>API Keys</h2><p>Your API keys are stored securely in the iOS Keychain. They are never transmitted to us.</p>
+    <h2>Local Storage</h2><p>Chat history and memories are stored locally using CoreData. You can clear all data from Settings.</p>
+    <h2>Contact</h2><p><a href="mailto:ad13dtu@gmail.com">ad13dtu@gmail.com</a></p>
+</div>
+</body>
+</html>
