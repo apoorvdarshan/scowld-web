@@ -139,6 +139,11 @@ export default function Home() {
               </a>
             </div>
             <p className="sr sr-delay-4 hero__beta-note">Only first 100 testers get early access.</p>
+            <div className="sr sr-delay-4" style={{ marginTop: "1.5rem" }}>
+              <a href="https://www.producthunt.com/products/scowld?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-scowld" target="_blank" rel="noopener noreferrer">
+                <img alt="Scowld - Meet your AI Waifu | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1100226&theme=dark&t=1773696293667" />
+              </a>
+            </div>
           </div>
 
           {/* Right column -- Phone mockup */}
