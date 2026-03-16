@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+::selection { background: rgba(0, 212, 255, 0.15); color: white; }
+html { scroll-behavior: smooth; }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
