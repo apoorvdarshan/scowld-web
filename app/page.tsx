@@ -44,9 +44,12 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px 0px 0px" }
     );
-    els.forEach((el) => observer.observe(el));
+    // Small delay to ensure DOM is ready
+    requestAnimationFrame(() => {
+      els.forEach((el) => observer.observe(el));
+    });
 
     /* Word reveal for hero headline */
     const words = document.querySelectorAll(".word-reveal");
@@ -104,7 +107,7 @@ export default function Home() {
         <div className="w-full max-w-[1200px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12">
 
           {/* Left column */}
-          <div className="pt-24 pb-4 lg:pt-0 lg:pb-0 max-w-[540px]">
+          <div className="pt-20 pb-2 lg:pt-0 lg:pb-0 max-w-[540px]">
 
             {/* Badge */}
             <div className="sr sr-delay-1 inline-flex items-center gap-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-1.5 mb-8">
@@ -118,19 +121,19 @@ export default function Home() {
             </div>
 
             {/* Headline with word reveal */}
-            <h1 className="text-[clamp(48px,7vw,88px)] font-semibold leading-[0.92] tracking-[-0.03em] text-white">
+            <h1 className="text-[clamp(36px,7vw,88px)] font-semibold leading-[0.92] tracking-[-0.03em] text-white">
               <span className="word-reveal"><span>Talk to her.</span></span>
               <br />
               <span className="word-reveal"><span className="text-white/15">She remembers.</span></span>
             </h1>
 
             {/* Description */}
-            <p className="sr sr-delay-2 mt-7 max-w-[400px] text-[15px] leading-[1.85] text-white/30 font-light">
+            <p className="sr sr-delay-2 mt-4 lg:mt-7 max-w-[400px] text-[13px] lg:text-[15px] leading-[1.75] text-white/30 font-light">
               An AI companion with a 3D anime avatar, hands-free voice, real-time vision, and memory that grows. Built in the open.
             </p>
 
             {/* Buttons */}
-            <div className="sr sr-delay-3 mt-10 flex items-center gap-3 flex-wrap">
+            <div className="sr sr-delay-3 mt-6 lg:mt-10 flex items-center gap-3 flex-wrap">
               <a
                 href="https://github.com/apoorvdarshan/scowld"
                 target="_blank"
@@ -156,7 +159,7 @@ export default function Home() {
                 width={320}
                 height={654}
                 priority
-                className="relative select-none max-h-[40vh] lg:max-h-[65vh] w-auto"
+                className="relative select-none max-h-[30vh] lg:max-h-[65vh] w-auto"
                 style={{
                   borderRadius: "32px",
                   filter: "brightness(0.95)",
