@@ -149,7 +149,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════
           HERO
           ═══════════════════════════════════════ */}
-      <section className="relative min-h-[calc(100dvh-48px)] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[calc(100dvh-56px)] flex items-center justify-center overflow-hidden">
         <div className="w-full max-w-[1200px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-8">
 
         {/* ── Left: Copy ── */}
