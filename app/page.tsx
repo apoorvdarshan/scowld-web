@@ -20,9 +20,9 @@ const tags = [
 ];
 
 /* ---- SVG components ---- */
-function GitHubIcon({ className = "w-4 h-4" }: { className?: string }) {
+function GitHubIcon({ size = 16 }: { size?: number }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
     </svg>
   );
@@ -46,7 +46,6 @@ export default function Home() {
       },
       { threshold: 0.05, rootMargin: "0px 0px 0px 0px" }
     );
-    // Small delay to ensure DOM is ready
     requestAnimationFrame(() => {
       els.forEach((el) => observer.observe(el));
     });
@@ -66,7 +65,7 @@ export default function Home() {
     );
     words.forEach((w, i) => {
       const span = w.querySelector("span");
-      if (span) span.style.transitionDelay = `${0.15 + i * 0.1}s`;
+      if (span) (span as HTMLElement).style.transitionDelay = `${0.15 + i * 0.1}s`;
       wordObserver.observe(w);
     });
 
@@ -77,81 +76,72 @@ export default function Home() {
   }, []);
 
   return (
-    <div ref={mainRef} className="relative min-h-screen bg-[#0a0a0a] overflow-x-hidden">
+    <div ref={mainRef} className="page">
 
       {/* ====== NAV ====== */}
-      <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between px-6 lg:px-10 bg-[#0a0a0a]/70 backdrop-blur-2xl border-b border-white/[0.04]">
-        <Link href="/" className="flex items-center gap-2.5 text-[14px] font-semibold tracking-[0.1em] text-white/80 uppercase">
-          <Image src="/logo.png" alt="" width={20} height={20} className="opacity-70" />
+      <header className="nav">
+        <Link href="/" className="nav__logo">
+          <Image src="/logo.png" alt="" width={20} height={20} className="nav__logo-img" />
           Scowld
         </Link>
-        <nav className="flex items-center gap-1">
-          <Link href="/privacy" className="nav-link px-3 py-1.5 text-[12px] font-medium text-white/25 hover:text-white/60 transition-colors">
-            Privacy
-          </Link>
-          <Link href="/terms" className="nav-link px-3 py-1.5 text-[12px] font-medium text-white/25 hover:text-white/60 transition-colors">
-            Terms
-          </Link>
+        <nav className="nav__links">
+          <Link href="/privacy" className="nav__link">Privacy</Link>
+          <Link href="/terms" className="nav__link">Terms</Link>
           <a
             href="https://github.com/apoorvdarshan/scowld"
             target="_blank"
-            className="social-icon ml-1 flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.06] text-white/20 hover:text-white/60 hover:border-white/[0.12]"
+            className="nav__github"
           >
-            <GitHubIcon className="w-3.5 h-3.5" />
+            <GitHubIcon size={14} />
           </a>
         </nav>
       </header>
 
       {/* ====== HERO ====== */}
-      <section className="relative flex items-center justify-center" style={{ minHeight: "calc(100dvh - 52px)" }}>
-        <div className="w-full max-w-[1200px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12">
+      <section className="hero">
+        <div className="hero__grid">
 
           {/* Left column */}
-          <div className="pt-20 pb-2 lg:pt-0 lg:pb-0 max-w-[540px]">
+          <div className="hero__content">
 
             {/* Badge */}
-            <div className="sr sr-delay-1 inline-flex items-center gap-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-1.5 mb-8">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 badge-pulse" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            <div className="sr sr-delay-1 hero__badge">
+              <span className="hero__badge-dot">
+                <span className="hero__badge-dot-ping" />
+                <span className="hero__badge-dot-solid" />
               </span>
-              <span className="text-[10px] font-semibold tracking-[0.14em] text-white/30 uppercase" style={{ fontFamily: "var(--font-mono), monospace" }}>
-                Open source on GitHub
-              </span>
+              <span className="hero__badge-text">Open source on GitHub</span>
             </div>
 
-            {/* Headline with word reveal */}
-            <h1 className="text-[clamp(36px,7vw,88px)] font-semibold leading-[0.92] tracking-[-0.03em] text-white">
+            {/* Headline */}
+            <h1 className="hero__heading">
               <span className="word-reveal"><span>Talk to her.</span></span>
               <br />
-              <span className="word-reveal"><span className="text-white/15">She remembers.</span></span>
+              <span className="word-reveal"><span className="hero__heading-dim">She remembers.</span></span>
             </h1>
 
             {/* Description */}
-            <p className="sr sr-delay-2 mt-4 lg:mt-7 max-w-[400px] text-[13px] lg:text-[15px] leading-[1.75] text-white/30 font-light">
+            <p className="sr sr-delay-2 hero__desc">
               An AI companion with a 3D anime avatar, hands-free voice, real-time vision, and memory that grows. Built in the open.
             </p>
 
             {/* Buttons */}
-            <div className="sr sr-delay-3 mt-6 lg:mt-10 flex items-center gap-3 flex-wrap">
+            <div className="sr sr-delay-3 hero__buttons">
               <a
                 href="https://github.com/apoorvdarshan/scowld"
                 target="_blank"
-                className="btn-primary inline-flex items-center gap-2.5 rounded-full bg-white px-7 py-3 text-[13px] font-semibold text-[#0a0a0a]"
+                className="btn-primary"
               >
-                <GitHubIcon /> View on GitHub
+                <GitHubIcon size={16} /> View on GitHub
               </a>
-              <a
-                href="#features"
-                className="btn-secondary inline-flex items-center gap-2 rounded-full border border-white/[0.08] px-7 py-3 text-[13px] text-white/35 hover:border-white/[0.15] hover:text-white/60"
-              >
-                Features <span className="text-[11px]">&darr;</span>
+              <a href="#features" className="btn-secondary">
+                Features <span className="btn-secondary__arrow">&darr;</span>
               </a>
             </div>
           </div>
 
           {/* Right column -- Phone mockup */}
-          <div className="flex items-center justify-center" style={{ perspective: "1200px" }}>
+          <div className="hero__phone-wrap">
             <div className="sr sr-delay-4 phone-float">
               <Image
                 src="/mockup.png"
@@ -159,12 +149,7 @@ export default function Home() {
                 width={320}
                 height={654}
                 priority
-                className="relative select-none max-h-[30vh] lg:max-h-[65vh] w-auto"
-                style={{
-                  borderRadius: "32px",
-                  filter: "brightness(0.95)",
-                  boxShadow: "0 40px 80px -20px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04)",
-                }}
+                className="hero__phone"
               />
             </div>
           </div>
@@ -172,17 +157,13 @@ export default function Home() {
       </section>
 
       {/* ====== MARQUEE ====== */}
-      <div className="border-y border-white/[0.04] py-3.5 overflow-hidden">
-        <div className="marquee-track">
+      <div className="marquee">
+        <div className="marquee__track">
           {[0, 1].map((k) => (
-            <div key={k} className="flex gap-12">
+            <div key={k} className="marquee__group">
               {tags.map((t) => (
-                <span
-                  key={t + k}
-                  className="flex items-center gap-3 whitespace-nowrap text-[10px] font-medium tracking-[0.18em] text-white/10 uppercase"
-                  style={{ fontFamily: "var(--font-mono), monospace" }}
-                >
-                  <span className="h-1 w-1 rounded-full bg-white/15" />
+                <span key={t + k} className="marquee__item">
+                  <span className="marquee__dot" />
                   {t}
                 </span>
               ))}
@@ -192,64 +173,52 @@ export default function Home() {
       </div>
 
       {/* ====== FEATURES ====== */}
-      <section id="features" className="mx-auto max-w-[1100px] px-6 lg:px-12 pt-28 pb-20 scroll-mt-20">
-        {/* Section header */}
-        <div className="mb-14">
-          <p
-            className="sr sr-delay-1 text-[10px] font-semibold tracking-[0.22em] text-white/25 uppercase mb-4 flex items-center gap-3"
-            style={{ fontFamily: "var(--font-mono), monospace" }}
-          >
-            <span className="w-5 h-px bg-white/15" />
+      <section id="features" className="features">
+        <div className="features__header">
+          <p className="sr sr-delay-1 features__label">
+            <span className="features__label-line" />
             Capabilities
           </p>
-          <h2 className="sr sr-delay-2 text-[clamp(28px,3.5vw,44px)] font-semibold tracking-[-0.02em] text-white leading-tight">
-            Everything built in.
-          </h2>
-          <p className="sr sr-delay-3 text-[14px] text-white/20 mt-3 max-w-[380px] font-light">
+          <h2 className="sr sr-delay-2 features__title">Everything built in.</h2>
+          <p className="sr sr-delay-3 features__subtitle">
             Natural conversation. Privacy by default. Your choice of AI.
           </p>
         </div>
 
-        {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="features__grid">
           {features.map((f, i) => (
-            <div
-              key={f.title}
-              className={`sr sr-delay-${i + 3} card-shimmer group p-7 transition-all duration-300 hover:bg-[#141414] hover:-translate-y-1 cursor-default`}
-            >
-              <span className="card-icon relative flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.06] bg-white/[0.02] mb-5">
-                <i className={`fa-solid ${f.icon} text-sm text-white/40`} />
+            <div key={f.title} className={`sr sr-delay-${i + 3} feature-card`}>
+              <span className="feature-card__icon">
+                <i className={`fa-solid ${f.icon}`} />
               </span>
-              <h3 className="relative text-[14px] font-bold text-white/80 mb-2.5">{f.title}</h3>
-              <p className="relative text-[12px] leading-[1.85] text-white/25 font-light">{f.desc}</p>
+              <h3 className="feature-card__title">{f.title}</h3>
+              <p className="feature-card__desc">{f.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ====== FOOTER ====== */}
-      <footer className="mx-auto max-w-[1100px] border-t border-white/[0.04] px-6 lg:px-12 py-8">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+      <footer className="footer">
+        <div className="footer__inner">
           {/* Left: logo, links, copyright */}
-          <div className="flex items-center gap-5 flex-wrap justify-center sm:justify-start">
-            <Link href="/" className="flex items-center gap-2 text-white/35 text-[12px] font-semibold tracking-[0.06em] uppercase">
-              <Image src="/logo.png" alt="" width={15} height={15} className="opacity-40" />
+          <div className="footer__left">
+            <Link href="/" className="footer__logo">
+              <Image src="/logo.png" alt="" width={15} height={15} className="footer__logo-img" />
               Scowld
             </Link>
-            <span className="hidden sm:block w-px h-3 bg-white/[0.06]" />
-            <div className="flex items-center gap-4">
-              <a href="https://github.com/apoorvdarshan/scowld" target="_blank" className="nav-link text-[11px] text-white/15 hover:text-white/50 transition-colors">GitHub</a>
-              <Link href="/privacy" className="nav-link text-[11px] text-white/15 hover:text-white/50 transition-colors">Privacy</Link>
-              <Link href="/terms" className="nav-link text-[11px] text-white/15 hover:text-white/50 transition-colors">Terms</Link>
+            <span className="footer__divider" />
+            <div className="footer__links">
+              <a href="https://github.com/apoorvdarshan/scowld" target="_blank" className="footer__link">GitHub</a>
+              <Link href="/privacy" className="footer__link">Privacy</Link>
+              <Link href="/terms" className="footer__link">Terms</Link>
             </div>
-            <span className="hidden sm:block w-px h-3 bg-white/[0.06]" />
-            <p className="text-[10px] text-white/10" style={{ fontFamily: "var(--font-mono), monospace" }}>
-              &copy; 2026 Apoorv Darshan
-            </p>
+            <span className="footer__divider" />
+            <p className="footer__copy">&copy; 2026 Apoorv Darshan</p>
           </div>
 
           {/* Right: social icons */}
-          <div className="flex gap-1.5">
+          <div className="footer__socials">
             {[
               {
                 href: "mailto:ad13dtu@gmail.com",
@@ -278,14 +247,14 @@ export default function Home() {
               },
               {
                 href: "https://github.com/apoorvdarshan/scowld",
-                icon: <GitHubIcon className="w-3 h-3" />,
+                icon: <GitHubIcon size={12} />,
               },
             ].map((s) => (
               <a
                 key={s.href}
                 href={s.href}
                 target={s.href.startsWith("mailto") ? undefined : "_blank"}
-                className="social-icon flex h-7 w-7 items-center justify-center rounded-lg border border-white/[0.04] text-white/15 hover:text-white/50 hover:border-white/[0.1]"
+                className="footer__social"
               >
                 {s.icon}
               </a>
