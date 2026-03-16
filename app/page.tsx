@@ -149,10 +149,11 @@ export default function Home() {
       {/* ═══════════════════════════════════════
           HERO
           ═══════════════════════════════════════ */}
-      <section className="relative grid min-h-[100dvh] grid-cols-1 lg:grid-cols-[1fr_auto] items-center overflow-hidden">
+      <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
+        <div className="w-full max-w-[1200px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-8">
 
         {/* ── Left: Copy ── */}
-        <div className="relative z-10 px-6 pt-40 pb-20 lg:pl-[max(48px,7vw)] lg:pr-0 lg:pt-0 lg:pb-0 max-w-[640px]">
+        <div className="relative z-10 pt-40 pb-20 lg:pt-0 lg:pb-0 max-w-[560px]">
 
           {/* Badge */}
           <div className="mb-10 inline-flex items-center gap-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-1.5">
@@ -203,60 +204,39 @@ export default function Home() {
 
         {/* ── Right: Phone mockup ── */}
         <div
-          className="relative z-0 hidden lg:flex items-center justify-end self-stretch"
-          style={{ perspective: "1400px" }}
+          className="relative flex items-center justify-center"
+          style={{ perspective: "1200px" }}
         >
           {/* Ambient glow */}
           <div
-            className="absolute right-[-120px] top-1/2 -translate-y-1/2 w-[600px] h-[800px] rounded-full bg-[#00d4ff] pointer-events-none blur-[180px]"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[600px] rounded-full bg-[#00d4ff] pointer-events-none blur-[160px]"
             style={{ animation: "glow-pulse 6s ease-in-out infinite" }}
           />
 
           {/* Phone */}
           <div
-            className="relative -mr-[80px]"
+            className="relative"
             style={{
               animation: "phone-float 8s ease-in-out infinite",
               transformStyle: "preserve-3d",
             }}
           >
-            {/* Shadow layer */}
-            <div
-              className="absolute inset-0 rounded-[40px] bg-black/40 blur-[80px] translate-y-12 scale-[0.9]"
-              style={{ transform: "translateZ(-60px) translateY(40px)" }}
-            />
             <Image
               src="/mockup.png"
               alt="Scowld app running on iPhone"
-              width={440}
-              height={900}
+              width={340}
+              height={696}
               priority
-              className="relative select-none"
+              className="relative select-none drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]"
               style={{
-                filter: "brightness(0.92) contrast(1.02)",
-                borderRadius: "36px",
+                filter: "brightness(0.94) contrast(1.02)",
+                borderRadius: "32px",
               }}
             />
           </div>
         </div>
 
-        {/* ── Mobile phone (centered) ── */}
-        <div
-          className="lg:hidden flex justify-center px-6 pb-16"
-          style={{ perspective: "900px" }}
-        >
-          <div style={{ transform: "rotateY(-5deg) rotateZ(1deg)" }}>
-            <Image
-              src="/mockup.png"
-              alt="Scowld app running on iPhone"
-              width={280}
-              height={572}
-              priority
-              className="drop-shadow-[0_40px_80px_rgba(0,0,0,0.7)] select-none"
-              style={{ borderRadius: "28px" }}
-            />
-          </div>
-        </div>
+        </div>{/* close grid */}
 
         {/* Bottom gradient fade */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0e0e0e] to-transparent" />
