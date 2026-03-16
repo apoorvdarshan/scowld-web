@@ -20,9 +20,9 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Content */}
-        <div className="relative z-10 px-6 md:px-12 lg:px-24 pt-32 pb-20 max-w-[600px]">
+      <section className="min-h-screen flex flex-col lg:flex-row items-center pt-20">
+        {/* Left content */}
+        <div className="flex-1 px-6 md:px-12 lg:px-24 py-20 lg:py-0">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] text-[11px] font-medium text-[#555] tracking-[0.08em] uppercase mb-10">
             <svg className="w-3 h-3 text-[#00d4ff]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
             AI Companion on your iPhone
@@ -37,55 +37,31 @@ export default function Home() {
             Connect with your AI companion through a 3D anime avatar. Talk hands-free, let her see through your camera, and build a relationship that grows over time. Open source.
           </p>
 
-          <div className="flex items-center gap-3 mb-6">
-            <a
-              href="https://github.com/apoorvdarshan/scowld"
-              target="_blank"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#111] text-[14px] font-semibold hover:translate-y-[-1px] hover:shadow-[0_8px_30px_rgba(0,212,255,0.1)] transition-all"
-            >
+          <div className="flex items-center gap-3 mb-6 flex-wrap">
+            <a href="https://github.com/apoorvdarshan/scowld" target="_blank" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#111] text-[14px] font-semibold hover:translate-y-[-1px] hover:shadow-[0_8px_30px_rgba(0,212,255,0.1)] transition-all">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
               View on GitHub
             </a>
-            <a
-              href="https://github.com/apoorvdarshan/scowld"
-              target="_blank"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/[0.1] text-[#888] text-[14px] font-medium hover:border-white/20 hover:text-white transition-all"
-            >
+            <a href="#features" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/[0.1] text-[#888] text-[14px] font-medium hover:border-white/20 hover:text-white transition-all">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="7 13 12 18 17 13"/><polyline points="7 6 12 11 17 6"/></svg>
               Explore
             </a>
           </div>
 
-          <a
-            href="https://github.com/apoorvdarshan/scowld/releases"
-            target="_blank"
-            className="text-[12px] text-[#444] font-mono hover:text-[#00d4ff] transition-colors inline-flex items-center gap-1.5"
-          >
+          <a href="https://github.com/apoorvdarshan/scowld/releases" target="_blank" className="text-[12px] text-[#444] font-mono hover:text-[#00d4ff] transition-colors inline-flex items-center gap-1.5">
             <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 01-9 9"/></svg>
             See latest release →
           </a>
         </div>
 
-        {/* Phone mockup - positioned right, overflowing */}
-        <div className="absolute right-[-5%] top-1/2 -translate-y-[45%] z-0 hidden lg:block">
+        {/* Right - phone mockup */}
+        <div className="flex-1 flex items-center justify-center lg:justify-end lg:pr-12 pb-10 lg:pb-0">
           <Image
             src="/mockup.png"
             alt="Scowld App"
-            width={520}
-            height={1060}
-            className="rotate-[4deg] drop-shadow-[0_40px_80px_rgba(0,0,0,0.5)]"
-            priority
-          />
-        </div>
-
-        {/* Mobile mockup */}
-        <div className="lg:hidden flex justify-center w-full px-6 pb-20">
-          <Image
-            src="/mockup.png"
-            alt="Scowld App"
-            width={280}
-            height={570}
-            className="drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+            width={380}
+            height={780}
+            className="rotate-[3deg] drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]"
             priority
           />
         </div>
