@@ -5,37 +5,103 @@ export const metadata = { title: "Terms of Service — Scowld" };
 
 export default function Terms() {
   return (
-    <div className="min-h-screen bg-[#111]">
-      <nav className="fixed top-0 w-full z-50 px-6 md:px-12 h-14 flex items-center bg-[#111]/70 backdrop-blur-xl border-b border-white/[0.06]">
-        <Link href="/" className="flex items-center gap-2.5 text-white font-semibold text-[15px] tracking-wide">
-          <Image src="/logo.png" alt="Scowld" width={20} height={20} />
+    <div className="min-h-screen bg-[#0a0a0a]">
+      <nav className="fixed top-0 w-full z-50 px-6 md:px-12 h-14 flex items-center bg-[#0a0a0a]/70 backdrop-blur-xl border-b border-white/[0.04]">
+        <Link href="/" className="flex items-center gap-2.5 text-white/80 font-bold text-[14px] tracking-[0.08em]">
+          <Image src="/logo.png" alt="Scowld" width={20} height={20} className="opacity-70" />
           SCOWLD
         </Link>
       </nav>
-      <div className="max-w-[680px] mx-auto px-6 pt-28 pb-20">
-        <Link href="/" className="text-[13px] text-[#444] font-mono hover:text-[#00d4ff] transition-colors mb-8 inline-block">← Back to home</Link>
-        <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">Terms of Service</h1>
-        <p className="text-[13px] text-[#444] font-mono mb-10">Last updated: March 16, 2026</p>
+      <div className="max-w-[700px] mx-auto px-6 pt-28 pb-20">
+        <Link href="/" className="text-[12px] text-white/20 font-mono hover:text-white/50 transition-colors mb-8 inline-block">← Back to home</Link>
+        <h1 className="text-[32px] font-bold text-white mb-2 tracking-tight">Terms of Service</h1>
+        <p className="text-[12px] text-white/20 font-mono mb-12">Last updated: March 16, 2026</p>
 
-        <div className="space-y-6 text-[15px] text-[#666] leading-[1.75]">
-          <div><h2 className="text-base font-bold text-white mb-2">Acceptance</h2><p>By using Scowld, you agree to these terms.</p></div>
-          <div><h2 className="text-base font-bold text-white mb-2">Description</h2><p>Scowld is an open-source AI companion app provided &quot;as is&quot; without warranties.</p></div>
-          <div><h2 className="text-base font-bold text-white mb-2">Your Responsibilities</h2>
-            <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li>You are responsible for your API keys and charges.</li>
-              <li>Comply with third-party AI provider terms.</li>
-              <li>Do not use for illegal purposes.</li>
+        <div className="space-y-8 text-[14px] text-white/40 leading-[1.85]">
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">1. Acceptance of Terms</h2>
+            <p>By downloading, installing, or using Scowld (&quot;the App&quot;), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use the App. These terms constitute a legal agreement between you and the developer, Apoorv Darshan.</p>
+          </div>
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">2. Description of Service</h2>
+            <p>Scowld is an open-source iOS application that provides an AI companion experience with the following features:</p>
+            <ul className="list-disc pl-5 mt-3 space-y-2">
+              <li>Conversational AI powered by third-party language model providers (Gemini, OpenAI, Claude, Ollama, OpenRouter, xAI, Together AI).</li>
+              <li>A 3D anime avatar with real-time lip sync, idle animations, and emotional expressions.</li>
+              <li>Hands-free voice input using on-device Apple Speech recognition.</li>
+              <li>Vision capabilities using the device&apos;s front camera.</li>
+              <li>Persistent memory that extracts and stores conversation context locally.</li>
+              <li>Text-to-speech output via ElevenLabs, OpenAI TTS, or native iOS synthesis.</li>
+            </ul>
+            <p className="mt-3">The App is provided &quot;as is&quot; and &quot;as available&quot; without warranties of any kind, either express or implied.</p>
+          </div>
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">3. Open Source License</h2>
+            <p>Scowld is released under the <strong className="text-white/60">MIT License</strong>. You are free to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, subject to the conditions of the MIT License. The full license text is available at <a href="https://github.com/apoorvdarshan/scowld/blob/main/LICENSE" target="_blank" className="text-white/50 hover:text-white underline underline-offset-2">github.com/apoorvdarshan/scowld/blob/main/LICENSE</a>.</p>
+          </div>
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">4. Your Responsibilities</h2>
+            <ul className="list-disc pl-5 space-y-2">
+              <li><strong className="text-white/60">API Keys:</strong> You are solely responsible for obtaining, managing, and securing your own API keys for third-party AI providers. Any costs, charges, or fees incurred through API usage are entirely your responsibility.</li>
+              <li><strong className="text-white/60">Third-Party Terms:</strong> You must comply with the terms of service and acceptable use policies of any AI provider you configure within the App (Google, OpenAI, Anthropic, ElevenLabs, etc.).</li>
+              <li><strong className="text-white/60">Lawful Use:</strong> You agree not to use the App for any illegal, harmful, abusive, harassing, threatening, or otherwise objectionable purposes.</li>
+              <li><strong className="text-white/60">Content:</strong> You are responsible for all content you generate, transmit, or receive through the App. The developer has no visibility into or control over your conversations.</li>
+              <li><strong className="text-white/60">Camera & Microphone:</strong> When you enable camera or microphone features, you consent to the App accessing these device capabilities for the purposes described in the Privacy Policy.</li>
             </ul>
           </div>
-          <div><h2 className="text-base font-bold text-white mb-2">Limitations</h2>
-            <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li>AI responses may be inaccurate.</li>
-              <li>We are not responsible for API costs.</li>
-              <li>Internet required for AI features.</li>
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">5. Limitations & Disclaimers</h2>
+            <ul className="list-disc pl-5 space-y-2">
+              <li><strong className="text-white/60">AI Accuracy:</strong> AI-generated responses may be inaccurate, incomplete, biased, or inappropriate. Do not rely on AI responses for medical, legal, financial, or safety-critical advice.</li>
+              <li><strong className="text-white/60">No Guarantee of Availability:</strong> Third-party AI providers may change their APIs, pricing, or terms at any time. The App may stop functioning with a particular provider without notice.</li>
+              <li><strong className="text-white/60">No Warranty:</strong> The App is provided without warranty of any kind. The developer does not guarantee that the App will be error-free, secure, or uninterrupted.</li>
+              <li><strong className="text-white/60">API Costs:</strong> The developer is not responsible for any costs you incur from third-party API usage. Monitor your own usage and set spending limits with your provider.</li>
+              <li><strong className="text-white/60">Data Loss:</strong> While the App stores data locally on your device, the developer is not responsible for any loss of chat history, memories, or settings due to device failure, iOS updates, or app deletion.</li>
+              <li><strong className="text-white/60">Internet Requirement:</strong> AI features require an active internet connection (except on-device speech recognition and native iOS TTS).</li>
             </ul>
           </div>
-          <div><h2 className="text-base font-bold text-white mb-2">Open Source</h2><p>Released under MIT License.</p></div>
-          <div><h2 className="text-base font-bold text-white mb-2">Contact</h2><p><a href="mailto:ad13dtu@gmail.com" className="text-[#00d4ff] hover:text-white">ad13dtu@gmail.com</a></p></div>
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">6. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by applicable law, the developer shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or use, arising out of or in connection with your use of the App, whether based on warranty, contract, tort, or any other legal theory.</p>
+          </div>
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">7. Third-Party Services</h2>
+            <p>The App integrates with third-party services that are not owned or controlled by the developer. The developer assumes no responsibility for the content, privacy policies, or practices of any third-party services. Your use of these services is governed by their respective terms.</p>
+          </div>
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">8. Intellectual Property</h2>
+            <p>The Scowld name, logo, and branding are the intellectual property of Apoorv Darshan. The source code is licensed under MIT. The 3D avatar system uses <a href="https://github.com/semperai/amica" target="_blank" className="text-white/50 hover:text-white underline underline-offset-2">Amica</a> by Semperai (MIT License).</p>
+          </div>
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">9. Modifications to Terms</h2>
+            <p>The developer reserves the right to modify these terms at any time. Updated terms will be posted on this page with a revised date. Your continued use of the App after changes are posted constitutes acceptance of the updated terms. Since the App has no server component, there is no mechanism to push notifications about term changes.</p>
+          </div>
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">10. Termination</h2>
+            <p>You may stop using the App at any time by deleting it from your device. There is no account to close. All locally stored data will be removed when the app is deleted.</p>
+          </div>
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">11. Governing Law</h2>
+            <p>These terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles.</p>
+          </div>
+
+          <div>
+            <h2 className="text-[15px] font-bold text-white/80 mb-3">12. Contact</h2>
+            <p>For questions about these terms, contact:<br />
+            <strong className="text-white/60">Apoorv Darshan</strong> — <a href="mailto:ad13dtu@gmail.com" className="text-white/50 hover:text-white underline underline-offset-2">ad13dtu@gmail.com</a></p>
+          </div>
+
         </div>
       </div>
     </div>
