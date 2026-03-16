@@ -181,8 +181,8 @@ body::before {
 }
 
 .hero__content {
-  padding-top: 80px;
-  padding-bottom: 8px;
+  padding-top: 64px;
+  padding-bottom: 4px;
   max-width: 540px;
 }
 
@@ -345,7 +345,7 @@ body::before {
 }
 
 .hero__phone {
-  max-height: 30vh;
+  max-height: 38vh;
   width: auto;
   border-radius: 32px;
   filter: brightness(0.95);
