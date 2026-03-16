@@ -147,8 +147,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right column -- Phone mockup (hidden on mobile) */}
-          <div className="hidden lg:flex items-center justify-center" style={{ perspective: "1200px" }}>
+          {/* Right column -- Phone mockup */}
+          <div className="flex items-center justify-center" style={{ perspective: "1200px" }}>
             <div className="sr sr-delay-4 phone-float">
               <Image
                 src="/mockup.png"
@@ -156,7 +156,7 @@ export default function Home() {
                 width={320}
                 height={654}
                 priority
-                className="relative select-none max-h-[65vh] w-auto"
+                className="relative select-none max-h-[40vh] lg:max-h-[65vh] w-auto"
                 style={{
                   borderRadius: "32px",
                   filter: "brightness(0.95)",
