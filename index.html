@@ -6,6 +6,7 @@
     <title>Scowld — Your AI Companion</title>
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
 
@@ -341,8 +342,8 @@
     </div>
     <div class="nav-links">
         <a href="#features">Features</a>
-        <a href="#privacy">Privacy</a>
-        <a href="#terms">Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
         <a href="https://github.com/apoorvdarshan/scowld" target="_blank">GitHub</a>
     </div>
 </nav>
@@ -414,117 +415,43 @@
     <div class="features-grid">
         <div class="feature-card reveal">
             <div class="glow-dot"></div>
-            <div class="feature-icon">&#x1f399;</div>
+            <div class="feature-icon"><i class="fa-solid fa-microphone" style="color:var(--cyan)"></i></div>
             <h3>Hands-Free Voice Chat</h3>
             <p>Always-on speech recognition. Talk naturally and your message auto-sends after a brief pause. Live captions for both sides.</p>
         </div>
         <div class="feature-card reveal reveal-delay-1">
             <div class="glow-dot"></div>
-            <div class="feature-icon">&#x2728;</div>
+            <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--cyan)"></i></div>
             <h3>3D Anime Avatar</h3>
             <p>Fully animated VRM character with lip sync, idle animations, and expressions. Powered by Three.js and Amica.</p>
         </div>
         <div class="feature-card reveal reveal-delay-2">
             <div class="glow-dot"></div>
-            <div class="feature-icon">&#x1f441;</div>
+            <div class="feature-icon"><i class="fa-solid fa-eye" style="color:var(--cyan)"></i></div>
             <h3>Vision</h3>
             <p>Front camera feeds to the AI so it can see what you see. No preview shown by default. Privacy-first design.</p>
         </div>
         <div class="feature-card reveal reveal-delay-3">
             <div class="glow-dot"></div>
-            <div class="feature-icon">&#x1f9e0;</div>
+            <div class="feature-icon"><i class="fa-solid fa-brain" style="color:var(--cyan)"></i></div>
             <h3>Persistent Memory</h3>
             <p>AI extracts and remembers key details across conversations. Builds context over time for personal interactions.</p>
         </div>
         <div class="feature-card reveal reveal-delay-4">
             <div class="glow-dot"></div>
-            <div class="feature-icon">&#x26a1;</div>
+            <div class="feature-icon"><i class="fa-solid fa-bolt" style="color:var(--cyan)"></i></div>
             <h3>Multi-Provider LLM</h3>
             <p>Choose your AI brain: Gemini, OpenAI, Claude, Ollama, OpenRouter, xAI, or Together AI. Switch anytime.</p>
         </div>
         <div class="feature-card reveal reveal-delay-5">
             <div class="glow-dot"></div>
-            <div class="feature-icon">&#x1f50a;</div>
+            <div class="feature-icon"><i class="fa-solid fa-volume-high" style="color:var(--cyan)"></i></div>
             <h3>Premium TTS</h3>
             <p>ElevenLabs, OpenAI TTS, or native iOS voices. Natural and expressive text-to-speech that brings your companion to life.</p>
         </div>
     </div>
 </section>
 
-<!-- Privacy -->
-<section class="legal" id="privacy">
-    <div class="legal-links">
-        <a href="#privacy" class="legal-link active">Privacy Policy</a>
-        <a href="#terms" class="legal-link">Terms of Service</a>
-    </div>
-    <h2 class="reveal">Privacy Policy</h2>
-    <p class="updated reveal">Last updated: March 16, 2026</p>
-
-    <div class="reveal">
-        <h3>Overview</h3>
-        <p>Scowld is designed with privacy in mind. Your data stays on your device unless you explicitly choose to use cloud AI providers.</p>
-
-        <h3>Data Collection</h3>
-        <p>Scowld does <strong style="color:var(--white)">not</strong> collect, store, or transmit any personal data to our servers. We do not have servers. The app runs entirely on your device.</p>
-
-        <h3>Third-Party Services</h3>
-        <p>When you configure an AI provider, your messages are sent to that provider's API. This is governed by their privacy policies:</p>
-        <ul>
-            <li>Google Gemini: <a href="https://ai.google.dev/terms" target="_blank">ai.google.dev/terms</a></li>
-            <li>OpenAI: <a href="https://openai.com/policies/privacy-policy" target="_blank">openai.com/policies/privacy-policy</a></li>
-            <li>Anthropic (Claude): <a href="https://www.anthropic.com/privacy" target="_blank">anthropic.com/privacy</a></li>
-            <li>ElevenLabs: <a href="https://elevenlabs.io/privacy" target="_blank">elevenlabs.io/privacy</a></li>
-        </ul>
-
-        <h3>Camera &amp; Microphone</h3>
-        <p>Camera and microphone data is processed on-device for speech recognition and sent to your configured AI provider only when you send a message. No audio or video is stored or transmitted elsewhere.</p>
-
-        <h3>API Keys</h3>
-        <p>Your API keys are stored securely in the iOS Keychain on your device. They are never transmitted to us or any third party other than the respective AI provider.</p>
-
-        <h3>Local Storage</h3>
-        <p>Chat history and memories are stored locally on your device using CoreData. You can clear all data at any time from Settings.</p>
-
-        <h3>Contact</h3>
-        <p>For privacy concerns: <a href="mailto:ad13dtu@gmail.com">ad13dtu@gmail.com</a></p>
-    </div>
-</section>
-
-<div class="legal-divider" style="max-width:800px;margin:0 auto"></div>
-
-<!-- Terms -->
-<section class="legal" id="terms">
-    <h2 class="reveal">Terms of Service</h2>
-    <p class="updated reveal">Last updated: March 16, 2026</p>
-
-    <div class="reveal">
-        <h3>Acceptance</h3>
-        <p>By using Scowld, you agree to these terms. If you do not agree, do not use the app.</p>
-
-        <h3>Description</h3>
-        <p>Scowld is an open-source AI companion app that provides conversational AI through third-party providers. It is provided "as is" without warranties of any kind.</p>
-
-        <h3>Your Responsibilities</h3>
-        <ul>
-            <li>You are responsible for your own API keys and any charges from AI providers.</li>
-            <li>You must comply with the terms of service of any third-party AI provider you use.</li>
-            <li>You must not use the app for any illegal or harmful purposes.</li>
-        </ul>
-
-        <h3>Limitations</h3>
-        <ul>
-            <li>AI responses may be inaccurate. Do not rely on them for medical, legal, or financial advice.</li>
-            <li>We are not responsible for any costs incurred through third-party API usage.</li>
-            <li>The app requires an internet connection for AI features.</li>
-        </ul>
-
-        <h3>Open Source</h3>
-        <p>Scowld is released under the MIT License. You are free to use, modify, and distribute the source code in accordance with the license terms.</p>
-
-        <h3>Contact</h3>
-        <p>Questions? <a href="mailto:ad13dtu@gmail.com">ad13dtu@gmail.com</a></p>
-    </div>
-</section>
 
 <!-- Footer -->
 <footer>
@@ -544,8 +471,8 @@
         </div>
         <div class="footer-col">
             <h4>Legal</h4>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
             <a href="https://github.com/apoorvdarshan/scowld/blob/main/LICENSE" target="_blank">MIT License</a>
         </div>
     </div>
