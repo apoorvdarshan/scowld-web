@@ -149,11 +149,11 @@ export default function Home() {
       {/* ═══════════════════════════════════════
           HERO
           ═══════════════════════════════════════ */}
-      <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[calc(100dvh-48px)] flex items-center justify-center overflow-hidden">
         <div className="w-full max-w-[1200px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 items-center gap-12 lg:gap-8">
 
         {/* ── Left: Copy ── */}
-        <div className="relative z-10 pt-40 pb-20 lg:pt-0 lg:pb-0 max-w-[560px]">
+        <div className="relative z-10 pt-32 pb-12 lg:pt-0 lg:pb-0 max-w-[560px]">
 
           {/* Badge */}
           <div className="mb-10 inline-flex items-center gap-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-1.5">
@@ -227,7 +227,7 @@ export default function Home() {
               width={340}
               height={696}
               priority
-              className="relative select-none drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)]"
+              className="relative select-none drop-shadow-[0_40px_80px_rgba(0,0,0,0.6)] max-h-[70vh] w-auto"
               style={{
                 filter: "brightness(0.94) contrast(1.02)",
                 borderRadius: "32px",
@@ -239,7 +239,7 @@ export default function Home() {
         </div>{/* close grid */}
 
         {/* Bottom gradient fade */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0e0e0e] to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#0e0e0e] to-transparent" />
       </section>
 
       {/* ═══════════════════════════════════════
