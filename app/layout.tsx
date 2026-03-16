@@ -8,9 +8,23 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Scowld — AI Companion",
     description: "3D anime avatar. Hands-free voice. Vision. Persistent memory. Open source.",
-    url: "https://scowld.com",
+    url: "https://scowld.vercel.app",
     siteName: "Scowld",
     type: "website",
+    images: [
+      {
+        url: "https://scowld.vercel.app/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Scowld — Your AI Companion",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Scowld — AI Companion",
+    description: "3D anime avatar. Hands-free voice. Vision. Persistent memory. Open source.",
+    images: ["https://scowld.vercel.app/og.png"],
   },
 };
 
