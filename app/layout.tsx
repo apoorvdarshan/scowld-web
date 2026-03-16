@@ -1,41 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Scowld — AI Companion",
-  description:
-    "Open-source AI companion with a 3D anime avatar, hands-free voice, vision, and persistent memory. Available on iOS.",
+  description: "Open-source AI companion with a 3D anime avatar, hands-free voice, vision, and persistent memory.",
   icons: { icon: "/logo.png" },
   openGraph: {
     title: "Scowld — AI Companion",
-    description:
-      "3D anime avatar. Hands-free voice. Vision. Persistent memory. Open source.",
+    description: "3D anime avatar. Hands-free voice. Vision. Persistent memory. Open source.",
     url: "https://scowld.com",
     siteName: "Scowld",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Scowld — AI Companion",
-    description:
-      "3D anime avatar. Hands-free voice. Vision. Persistent memory. Open source.",
-  },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0e0e0e] text-[#888] font-[family-name:var(--font-geist-sans)] grain`}
-      >
+      <head>
+        <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+      </head>
+      <body className={`${mono.variable} antialiased bg-[#0a0a0a] text-[#888]`} style={{ fontFamily: "'Satoshi', sans-serif" }}>
         {children}
       </body>
     </html>
