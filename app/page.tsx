@@ -134,10 +134,11 @@ export default function Home() {
               >
                 <GitHubIcon size={16} /> View on GitHub
               </a>
-              <a href="#features" className="btn-secondary">
-                Features <span className="btn-secondary__arrow">&darr;</span>
+              <a href="https://tally.so/r/jaxBOJ" target="_blank" className="btn-secondary">
+                Join Beta <span className="btn-secondary__arrow">&rarr;</span>
               </a>
             </div>
+            <p className="sr sr-delay-4 hero__beta-note">Only first 100 testers get early access.</p>
           </div>
 
           {/* Right column -- Phone mockup */}
