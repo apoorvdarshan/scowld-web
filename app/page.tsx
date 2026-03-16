@@ -1,149 +1,280 @@
 import Image from "next/image";
 import Link from "next/link";
 
+/* ────────────────────────────────────────────
+   Data
+   ──────────────────────────────────────────── */
+
 const features = [
-  { icon: "🎙", label: "Hands-Free Voice", desc: "Always-on recognition. Talk naturally — auto-sends after a pause." },
-  { icon: "✦", label: "3D Anime Avatar", desc: "VRM character with lip sync, idle animations, and expressions." },
-  { icon: "◉", label: "Vision", desc: "Front camera feeds to AI. She sees what you see. Privacy-first." },
-  { icon: "◎", label: "Persistent Memory", desc: "Remembers details across conversations. Context that compounds." },
-  { icon: "⚡", label: "Multi-Provider LLM", desc: "Gemini, OpenAI, Claude, Ollama, xAI, Together. Your choice." },
-  { icon: "♬", label: "Premium TTS", desc: "ElevenLabs, OpenAI TTS, or native iOS. Expressive and natural." },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+        <line x1="12" y1="19" x2="12" y2="23" />
+        <line x1="8" y1="23" x2="16" y2="23" />
+      </svg>
+    ),
+    label: "Hands-Free Voice",
+    desc: "Always-on recognition. Talk naturally -- she listens, understands, and responds after a pause.",
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5" />
+        <path d="M2 12l10 5 10-5" />
+      </svg>
+    ),
+    label: "3D Anime Avatar",
+    desc: "VRM character with real-time lip sync, idle animations, and expressive reactions.",
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    ),
+    label: "Vision",
+    desc: "Front camera feeds to AI in real time. She sees what you see. Privacy-first, always.",
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+        <line x1="12" y1="22.08" x2="12" y2="12" />
+      </svg>
+    ),
+    label: "Persistent Memory",
+    desc: "Remembers details across every conversation. Context that compounds over time.",
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+      </svg>
+    ),
+    label: "Multi-Provider LLM",
+    desc: "Gemini, OpenAI, Claude, Ollama, xAI, Together. Choose any model. Switch anytime.",
+  },
+  {
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9 18V5l12-2v13" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="18" cy="16" r="3" />
+      </svg>
+    ),
+    label: "Premium TTS",
+    desc: "ElevenLabs, OpenAI TTS, or native iOS voices. Expressive, natural, and fast.",
+  },
 ];
 
 const marqueeItems = [
-  "HANDS-FREE VOICE", "3D AVATAR", "VISION", "MEMORY",
-  "MULTI-LLM", "ELEVENLABS", "ON-DEVICE STT", "OPEN SOURCE",
+  "HANDS-FREE VOICE",
+  "3D AVATAR",
+  "VISION",
+  "PERSISTENT MEMORY",
+  "MULTI-LLM",
+  "ELEVENLABS TTS",
+  "ON-DEVICE STT",
+  "OPEN SOURCE",
+  "PRIVACY FIRST",
+  "VRM SUPPORT",
 ];
+
+/* ────────────────────────────────────────────
+   GitHub SVG (reused)
+   ──────────────────────────────────────────── */
+function GitHubIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  );
+}
+
+/* ────────────────────────────────────────────
+   Page
+   ──────────────────────────────────────────── */
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen bg-[#111] overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#0e0e0e] overflow-x-hidden">
 
-      {/* ── NAV ── */}
-      <header className="fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between px-6 lg:px-10 bg-[#111]/60 backdrop-blur-2xl border-b border-white/[0.04]">
-        <Link href="/" className="flex items-center gap-2 text-[13px] font-bold tracking-[0.15em] text-white/90 uppercase">
-          <Image src="/logo.png" alt="" width={18} height={18} className="opacity-80" />
+      {/* ═══════════════════════════════════════
+          NAV
+          ═══════════════════════════════════════ */}
+      <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between px-6 lg:px-12 bg-[#0e0e0e]/70 backdrop-blur-2xl border-b border-white/[0.04]">
+        <Link
+          href="/"
+          className="flex items-center gap-2.5 text-[13px] font-bold tracking-[0.18em] text-white/90 uppercase select-none"
+        >
+          <Image
+            src="/logo.png"
+            alt="Scowld"
+            width={20}
+            height={20}
+            className="opacity-80"
+          />
           Scowld
         </Link>
+
         <nav className="flex items-center gap-1">
-          {[
-            { href: "/privacy", label: "Privacy" },
-            { href: "/terms", label: "Terms" },
-          ].map((l) => (
-            <Link key={l.href} href={l.href} className="px-3 py-1 text-[12px] text-white/30 hover:text-white/70 transition-colors rounded-md">
-              {l.label}
-            </Link>
-          ))}
+          <Link
+            href="/privacy"
+            className="px-3.5 py-1.5 text-[11px] font-medium tracking-wide text-white/25 hover:text-white/60 transition-colors duration-200"
+          >
+            Privacy
+          </Link>
+          <Link
+            href="/terms"
+            className="px-3.5 py-1.5 text-[11px] font-medium tracking-wide text-white/25 hover:text-white/60 transition-colors duration-200"
+          >
+            Terms
+          </Link>
           <a
             href="https://github.com/apoorvdarshan/scowld"
             target="_blank"
-            className="ml-1 flex h-7 w-7 items-center justify-center rounded-md border border-white/[0.06] text-white/25 hover:text-white/60 hover:border-white/10 transition-all"
+            rel="noopener noreferrer"
+            className="ml-2 flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.06] text-white/25 hover:text-white/60 hover:border-white/[0.12] transition-all duration-200"
           >
-            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" /></svg>
+            <GitHubIcon className="w-3.5 h-3.5" />
           </a>
         </nav>
       </header>
 
-      {/* ── HERO ── */}
-      <section className="relative grid min-h-screen grid-cols-1 lg:grid-cols-[1fr_auto] items-center">
-        {/* left */}
-        <div className="relative z-10 px-6 pt-36 pb-16 lg:pl-[max(40px,6vw)] lg:pr-0 lg:pt-0 lg:pb-0 max-w-[620px]">
-          <span className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.02] px-3.5 py-1 text-[10px] font-semibold tracking-[0.1em] text-white/30 uppercase">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-400" />
-            </span>
-            AI companion on your iPhone
-          </span>
+      {/* ═══════════════════════════════════════
+          HERO
+          ═══════════════════════════════════════ */}
+      <section className="relative grid min-h-[100dvh] grid-cols-1 lg:grid-cols-[1fr_auto] items-center overflow-hidden">
 
-          <h1 className="text-[clamp(52px,7vw,88px)] font-extrabold leading-[0.92] tracking-[-0.045em] text-white">
+        {/* ── Left: Copy ── */}
+        <div className="relative z-10 px-6 pt-40 pb-20 lg:pl-[max(48px,7vw)] lg:pr-0 lg:pt-0 lg:pb-0 max-w-[640px]">
+
+          {/* Badge */}
+          <div className="mb-10 inline-flex items-center gap-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-1.5">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00d4ff] opacity-50" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#00d4ff]" />
+            </span>
+            <span className="text-[10px] font-semibold tracking-[0.12em] text-white/30 uppercase">
+              Open source on GitHub
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="text-[clamp(48px,7.5vw,96px)] font-extrabold leading-[0.9] tracking-[-0.04em] text-white">
             Talk to her.
             <br />
-            <span className="text-white/20">She remembers.</span>
+            <span className="text-white/15">She remembers.</span>
           </h1>
 
-          <p className="mt-6 max-w-[380px] text-[14px] leading-[1.8] text-white/30">
-            Your AI companion with a 3D anime avatar. Talk hands-free,
-            let her see through your camera, and watch the relationship
-            grow. Open&nbsp;source.
+          {/* Subhead */}
+          <p className="mt-7 max-w-[400px] text-[15px] leading-[1.75] text-white/30 font-light">
+            An AI companion with a 3D anime avatar, hands-free voice,
+            real-time vision, and memory that grows. Built in the open.
           </p>
 
-          <div className="mt-10 flex items-center gap-3">
+          {/* CTAs */}
+          <div className="mt-12 flex items-center gap-4">
             <a
               href="https://github.com/apoorvdarshan/scowld"
               target="_blank"
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[13px] font-semibold text-[#111] transition-all hover:shadow-[0_0_40px_rgba(0,212,255,0.12)]"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-white px-6 py-3 text-[13px] font-semibold text-[#0e0e0e] transition-all duration-200 hover:shadow-[0_0_48px_rgba(0,212,255,0.1)]"
             >
-              <svg className="w-4 h-4 transition-transform group-hover:-translate-y-px" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" /></svg>
+              <GitHubIcon className="w-4 h-4 transition-transform duration-200 group-hover:-translate-y-px" />
               View on GitHub
             </a>
             <a
               href="#features"
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] px-5 py-2.5 text-[13px] font-medium text-white/40 transition-all hover:border-white/15 hover:text-white/70"
+              className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] px-6 py-3 text-[13px] font-medium text-white/35 transition-all duration-200 hover:border-white/[0.15] hover:text-white/60"
             >
-              Explore&ensp;↓
+              Features
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" className="mt-px">
+                <path d="M5 2v6M2 5l3 3 3-3" />
+              </svg>
             </a>
           </div>
-
-          <p className="mt-6 font-mono text-[11px] text-white/15 tracking-wide">
-            <a href="https://github.com/apoorvdarshan/scowld/releases" target="_blank" className="hover:text-white/40 transition-colors">
-              ↳ see latest release →
-            </a>
-          </p>
         </div>
 
-        {/* right — phone */}
+        {/* ── Right: Phone mockup ── */}
         <div
           className="relative z-0 hidden lg:flex items-center justify-end self-stretch"
-          style={{ perspective: "1200px" }}
+          style={{ perspective: "1400px" }}
         >
-          {/* subtle glow behind phone */}
-          <div className="absolute right-[-80px] top-1/2 -translate-y-1/2 w-[500px] h-[700px] rounded-full bg-cyan-500/[0.03] blur-[120px] pointer-events-none" />
+          {/* Ambient glow */}
           <div
-            className="relative -mr-[60px]"
+            className="absolute right-[-120px] top-1/2 -translate-y-1/2 w-[600px] h-[800px] rounded-full bg-[#00d4ff] pointer-events-none blur-[180px]"
+            style={{ animation: "glow-pulse 6s ease-in-out infinite" }}
+          />
+
+          {/* Phone */}
+          <div
+            className="relative -mr-[80px]"
             style={{
-              transform: "rotateY(-8deg) rotateX(2deg) rotateZ(2deg)",
+              animation: "phone-float 8s ease-in-out infinite",
               transformStyle: "preserve-3d",
             }}
           >
+            {/* Shadow layer */}
+            <div
+              className="absolute inset-0 rounded-[40px] bg-black/40 blur-[80px] translate-y-12 scale-[0.9]"
+              style={{ transform: "translateZ(-60px) translateY(40px)" }}
+            />
             <Image
               src="/mockup.png"
-              alt="Scowld App"
-              width={420}
-              height={860}
+              alt="Scowld app running on iPhone"
+              width={440}
+              height={900}
               priority
-              className="drop-shadow-[0_60px_120px_rgba(0,0,0,0.8)] select-none"
-              style={{ filter: "brightness(0.95)" }}
+              className="relative select-none"
+              style={{
+                filter: "brightness(0.92) contrast(1.02)",
+                borderRadius: "36px",
+              }}
             />
           </div>
         </div>
 
-        {/* mobile phone (centered, below text) */}
-        <div className="lg:hidden flex justify-center px-6 pb-12" style={{ perspective: "800px" }}>
-          <div style={{ transform: "rotateY(-4deg) rotateZ(1deg)" }}>
+        {/* ── Mobile phone (centered) ── */}
+        <div
+          className="lg:hidden flex justify-center px-6 pb-16"
+          style={{ perspective: "900px" }}
+        >
+          <div style={{ transform: "rotateY(-5deg) rotateZ(1deg)" }}>
             <Image
               src="/mockup.png"
-              alt="Scowld App"
-              width={260}
-              height={530}
+              alt="Scowld app running on iPhone"
+              width={280}
+              height={572}
               priority
-              className="drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)]"
+              className="drop-shadow-[0_40px_80px_rgba(0,0,0,0.7)] select-none"
+              style={{ borderRadius: "28px" }}
             />
           </div>
         </div>
 
-        {/* bottom fade */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#111] to-transparent" />
+        {/* Bottom gradient fade */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0e0e0e] to-transparent" />
       </section>
 
-      {/* ── MARQUEE ── */}
-      <div className="relative border-y border-white/[0.04] py-3 overflow-hidden">
-        <div className="flex w-max gap-8 animate-[marquee_35s_linear_infinite]">
-          {[...Array(2)].map((_, k) => (
-            <div key={k} className="flex gap-8">
+      {/* ═══════════════════════════════════════
+          MARQUEE
+          ═══════════════════════════════════════ */}
+      <div className="relative border-y border-white/[0.04] py-4 overflow-hidden select-none">
+        <div className="flex w-max gap-10 animate-[marquee_40s_linear_infinite]">
+          {[0, 1].map((k) => (
+            <div key={k} className="flex gap-10">
               {marqueeItems.map((t) => (
-                <span key={t + k} className="flex items-center gap-2 whitespace-nowrap font-mono text-[10px] font-semibold tracking-[0.14em] text-white/15 uppercase">
-                  <span className="h-[3px] w-[3px] rounded-full bg-cyan-400/60" />
+                <span
+                  key={t + k}
+                  className="flex items-center gap-3 whitespace-nowrap font-mono text-[10px] font-medium tracking-[0.18em] text-white/12 uppercase"
+                >
+                  <span className="h-[3px] w-[3px] rounded-full bg-[#00d4ff]/40" />
                   {t}
                 </span>
               ))}
@@ -152,83 +283,206 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── FEATURES ── */}
-      <section id="features" className="mx-auto max-w-[1060px] px-6 lg:px-10 pt-28 pb-20 scroll-mt-20">
-        <p className="font-mono text-[10px] font-bold tracking-[0.18em] text-cyan-400/70 uppercase mb-3">
-          <span className="inline-block w-3 h-px bg-cyan-400/50 mr-2 align-middle" />
-          Features
-        </p>
-        <h2 className="text-[clamp(24px,3.2vw,38px)] font-bold tracking-tight text-white/90 mb-2 leading-tight">
-          Everything built&nbsp;in.
-        </h2>
-        <p className="text-[14px] text-white/25 mb-14 max-w-[380px]">
-          Natural conversation. Privacy by default. Your&nbsp;choice&nbsp;of&nbsp;AI.
-        </p>
+      {/* ═══════════════════════════════════════
+          FEATURES
+          ═══════════════════════════════════════ */}
+      <section
+        id="features"
+        className="mx-auto max-w-[1100px] px-6 lg:px-12 pt-32 pb-24 scroll-mt-24"
+      >
+        {/* Section header */}
+        <div className="mb-16">
+          <p className="font-mono text-[10px] font-semibold tracking-[0.2em] text-[#00d4ff]/60 uppercase mb-4 flex items-center gap-2.5">
+            <span className="inline-block w-4 h-px bg-[#00d4ff]/40" />
+            Capabilities
+          </p>
+          <h2 className="text-[clamp(26px,3.5vw,42px)] font-bold tracking-[-0.03em] text-white/90 leading-[1.1] mb-3">
+            Everything built in.
+          </h2>
+          <p className="text-[14px] text-white/20 max-w-[360px] leading-relaxed">
+            Natural conversation. Privacy by default. Your choice of AI model.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[1px] rounded-2xl overflow-hidden bg-white/[0.04]">
-          {features.map((f) => (
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px rounded-2xl overflow-hidden bg-white/[0.03]">
+          {features.map((f, i) => (
             <div
               key={f.label}
-              className="group relative bg-[#151515] p-7 transition-colors hover:bg-[#181818]"
+              className={`group relative bg-[#131313] p-8 transition-colors duration-200 hover:bg-[#161616] animate-fade-in-up stagger-${i + 1}`}
             >
-              {/* hover glow */}
-              <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_top_right,rgba(0,212,255,0.04),transparent_60%)]" />
-              <span className="relative mb-4 flex h-9 w-9 items-center justify-center rounded-lg bg-white/[0.03] border border-white/[0.05] text-[15px] text-cyan-300/60">
+              {/* Hover glow */}
+              <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(ellipse_at_top_right,rgba(0,212,255,0.03),transparent_70%)]" />
+
+              {/* Icon */}
+              <span className="relative mb-5 flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.03] border border-white/[0.05] text-[#00d4ff]/50">
                 {f.icon}
               </span>
-              <h3 className="relative text-[13px] font-bold text-white/80 mb-1.5 tracking-tight">{f.label}</h3>
-              <p className="relative text-[12px] leading-[1.7] text-white/25">{f.desc}</p>
+
+              {/* Title */}
+              <h3 className="relative text-[14px] font-semibold text-white/80 mb-2 tracking-[-0.01em]">
+                {f.label}
+              </h3>
+
+              {/* Description */}
+              <p className="relative text-[12px] leading-[1.8] text-white/20">
+                {f.desc}
+              </p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="mx-auto max-w-[1060px] border-t border-white/[0.04] px-6 lg:px-10 pt-10 pb-8">
-        <div className="flex flex-col md:flex-row justify-between gap-10 mb-10">
-          <div className="max-w-[240px]">
-            <div className="flex items-center gap-2 mb-2.5">
-              <Image src="/logo.png" alt="" width={16} height={16} className="opacity-60" />
-              <span className="text-[13px] font-bold text-white/60">Scowld</span>
+      {/* ═══════════════════════════════════════
+          FOOTER
+          ═══════════════════════════════════════ */}
+      <footer className="mx-auto max-w-[1100px] border-t border-white/[0.04] px-6 lg:px-12 pt-14 pb-10">
+        <div className="flex flex-col md:flex-row justify-between gap-12 mb-12">
+
+          {/* Brand */}
+          <div className="max-w-[260px]">
+            <div className="flex items-center gap-2.5 mb-3">
+              <Image
+                src="/logo.png"
+                alt="Scowld"
+                width={18}
+                height={18}
+                className="opacity-50"
+              />
+              <span className="text-[13px] font-bold tracking-wide text-white/50">
+                Scowld
+              </span>
             </div>
-            <p className="text-[11px] leading-[1.7] text-white/20">
-              Open-source AI companion. 3D avatar, voice, vision,&nbsp;memory.
+            <p className="text-[11px] leading-[1.8] text-white/16">
+              Open-source AI companion with a 3D avatar, voice, vision, and persistent memory.
             </p>
           </div>
-          <div className="flex gap-14">
+
+          {/* Link columns */}
+          <div className="flex gap-16">
             <div>
-              <h4 className="font-mono text-[9px] font-bold tracking-[0.15em] text-white/20 uppercase mb-2.5">Product</h4>
-              <div className="flex flex-col gap-1">
-                <a href="https://github.com/apoorvdarshan/scowld" target="_blank" className="text-[12px] text-white/20 hover:text-white/50 transition-colors">GitHub</a>
-                <a href="https://github.com/apoorvdarshan/scowld/blob/main/CONTRIBUTING.md" target="_blank" className="text-[12px] text-white/20 hover:text-white/50 transition-colors">Contribute</a>
+              <h4 className="font-mono text-[9px] font-bold tracking-[0.18em] text-white/18 uppercase mb-3">
+                Product
+              </h4>
+              <div className="flex flex-col gap-1.5">
+                <a
+                  href="https://github.com/apoorvdarshan/scowld"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[12px] text-white/18 hover:text-white/50 transition-colors duration-200"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://github.com/apoorvdarshan/scowld/releases"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[12px] text-white/18 hover:text-white/50 transition-colors duration-200"
+                >
+                  Releases
+                </a>
               </div>
             </div>
+
             <div>
-              <h4 className="font-mono text-[9px] font-bold tracking-[0.15em] text-white/20 uppercase mb-2.5">Legal</h4>
-              <div className="flex flex-col gap-1">
-                <Link href="/privacy" className="text-[12px] text-white/20 hover:text-white/50 transition-colors">Privacy</Link>
-                <Link href="/terms" className="text-[12px] text-white/20 hover:text-white/50 transition-colors">Terms</Link>
+              <h4 className="font-mono text-[9px] font-bold tracking-[0.18em] text-white/18 uppercase mb-3">
+                Legal
+              </h4>
+              <div className="flex flex-col gap-1.5">
+                <Link
+                  href="/privacy"
+                  className="text-[12px] text-white/18 hover:text-white/50 transition-colors duration-200"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  href="/terms"
+                  className="text-[12px] text-white/18 hover:text-white/50 transition-colors duration-200"
+                >
+                  Terms of Service
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-mono text-[9px] font-bold tracking-[0.18em] text-white/18 uppercase mb-3">
+                Connect
+              </h4>
+              <div className="flex flex-col gap-1.5">
+                <a
+                  href="mailto:ad13dtu@gmail.com"
+                  className="text-[12px] text-white/18 hover:text-white/50 transition-colors duration-200"
+                >
+                  Email
+                </a>
+                <a
+                  href="https://x.com/apoorvdarshan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[12px] text-white/18 hover:text-white/50 transition-colors duration-200"
+                >
+                  X / Twitter
+                </a>
+                <a
+                  href="https://linkedin.com/in/apoorvdarshan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[12px] text-white/18 hover:text-white/50 transition-colors duration-200"
+                >
+                  LinkedIn
+                </a>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/[0.04]">
-          <p className="font-mono text-[10px] text-white/12 tracking-wide">© 2026 Apoorv Darshan</p>
-          <div className="flex gap-1.5">
-            {[
-              { href: "mailto:ad13dtu@gmail.com", label: "✉" },
-              { href: "https://x.com/apoorvdarshan", label: "𝕏" },
-              { href: "https://linkedin.com/in/apoorvdarshan", label: "in" },
-            ].map((s) => (
-              <a
-                key={s.href}
-                href={s.href}
-                target={s.href.startsWith("mailto") ? undefined : "_blank"}
-                className="flex h-7 w-7 items-center justify-center rounded-md border border-white/[0.05] text-[10px] text-white/20 hover:text-white/50 hover:border-white/10 transition-all"
-              >
-                {s.label}
-              </a>
-            ))}
+
+        {/* Bottom bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-white/[0.04]">
+          <p className="font-mono text-[10px] text-white/10 tracking-wider">
+            &copy; 2026 Apoorv Darshan
+          </p>
+          <div className="flex gap-2">
+            {/* Email */}
+            <a
+              href="mailto:ad13dtu@gmail.com"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.05] text-white/18 hover:text-white/50 hover:border-white/[0.1] transition-all duration-200"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="M22 4l-10 8L2 4" />
+              </svg>
+            </a>
+            {/* X */}
+            <a
+              href="https://x.com/apoorvdarshan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.05] text-white/18 hover:text-white/50 hover:border-white/[0.1] transition-all duration-200"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+            {/* LinkedIn */}
+            <a
+              href="https://linkedin.com/in/apoorvdarshan"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.05] text-white/18 hover:text-white/50 hover:border-white/[0.1] transition-all duration-200"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+            {/* GitHub */}
+            <a
+              href="https://github.com/apoorvdarshan/scowld"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.05] text-white/18 hover:text-white/50 hover:border-white/[0.1] transition-all duration-200"
+            >
+              <GitHubIcon className="w-3.5 h-3.5" />
+            </a>
           </div>
         </div>
       </footer>
