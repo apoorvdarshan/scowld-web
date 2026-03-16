@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scowld - Your AI Companion</title>
+    <link rel="icon" type="image/png" href="assets/logo-dark.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --cyan: #00d4ff;
+            --blue: #3366ff;
+            --dark: #0a0a0f;
+            --card: #12121a;
+            --border: #1e1e2e;
+            --text: #e0e0e0;
+            --muted: #6b7280;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { color: var(--cyan); text-decoration: none; transition: opacity 0.2s; }
+        a:hover { opacity: 0.8; }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10, 10, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+        }
+        .nav-logo img { width: 28px; height: 28px; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; }
+        .nav-links a:hover { color: white; }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 40px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 60px;
+        }
+        .hero-content { flex: 1; }
+        .hero-visual { flex: 0 0 320px; }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--cyan), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .hero h1 img { width: 56px; height: 56px; -webkit-text-fill-color: initial; }
+
+        .hero .tagline {
+            font-size: 20px;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            background: var(--card);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .badge .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--cyan);
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            color: var(--muted);
+            max-width: 500px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: white;
+            color: black;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.15);
+            opacity: 1;
+        }
+        .cta-btn svg { width: 20px; height: 20px; }
+
+        .phone-frame {
+            background: var(--card);
+            border-radius: 32px;
+            border: 2px solid var(--border);
+            padding: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .phone-frame img {
+            width: 100%;
+            border-radius: 22px;
+            display: block;
+        }
+
+        /* Marquee */
+        .marquee-section {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+            overflow: hidden;
+        }
+        .marquee-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+            gap: 48px;
+            width: max-content;
+        }
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+        }
+        .marquee-item .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Features */
+        .features {
+            padding: 100px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .features h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 48px;
+            text-align: center;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: border-color 0.3s, transform 0.2s;
+        }
+        .feature-card:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-4px);
+        }
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(51, 102, 255, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            font-size: 20px;
+        }
+        .feature-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: white; }
+        .feature-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+        /* Privacy & Terms */
+        .legal {
+            padding: 80px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .legal h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+        .legal h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            margin: 24px 0 8px;
+        }
+        .legal p, .legal li {
+            font-size: 15px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+        .legal ul { padding-left: 20px; margin: 8px 0; }
+        .legal li { margin-bottom: 4px; }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-left img { width: 24px; height: 24px; }
+        .footer-left span { font-size: 14px; color: var(--muted); }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { color: var(--muted); font-size: 14px; }
+        .footer-links a:hover { color: white; }
+        .footer-social { display: flex; gap: 16px; }
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .footer-social a:hover { border-color: var(--cyan); color: white; }
+        .footer-social svg { width: 16px; height: 16px; fill: currentColor; }
+        .footer-bottom {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 14px 20px; }
+            .nav-links { display: none; }
+            .hero { flex-direction: column; padding: 100px 20px 60px; text-align: center; }
+            .hero h1 { font-size: 36px; justify-content: center; }
+            .hero h1 img { width: 40px; height: 40px; }
+            .badges { justify-content: center; }
+            .hero-desc { margin: 0 auto 40px; }
+            .hero-visual { flex: 0 0 auto; width: 260px; }
+            .features { padding: 60px 20px; }
+            .legal { padding: 60px 20px; }
+            footer { padding: 30px 20px; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+
+        /* Smooth scroll */
+        html { scroll-behavior: smooth; }
+        section { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+    <div class="nav-logo">
+        <img src="assets/logo.png" alt="Scowld">
+        Scowld
+    </div>
+    <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+        <a href="https://github.com/apoorvdarshan/scowld" target="_blank">GitHub</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>
+            <img src="assets/logo.png" alt="">
+            Scowld
+        </h1>
+        <p class="tagline">Your AI Companion</p>
+        <div class="badges">
+            <span class="badge"><span class="dot"></span> AI-Powered</span>
+            <span class="badge"><span class="dot"></span> iOS App</span>
+            <span class="badge"><span class="dot"></span> Privacy First</span>
+            <span class="badge"><span class="dot"></span> Open Source</span>
+        </div>
+        <p class="hero-desc">
+            Meet your AI companion with a 3D anime avatar. Talk hands-free with voice chat,
+            let it see through your camera, and build a relationship that remembers.
+            Powered by your choice of AI — Gemini, OpenAI, Claude, and more.
+        </p>
+        <a href="https://github.com/apoorvdarshan/scowld" class="cta-btn" target="_blank">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View on GitHub
+        </a>
+    </div>
+    <div class="hero-visual">
+        <div class="phone-frame">
+            <img src="assets/screenshot.png" alt="Scowld App Screenshot">
+        </div>
+    </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-section">
+    <div class="marquee-track">
+        <span class="marquee-item"><span class="dot"></span> HANDS-FREE VOICE</span>
+        <span class="marquee-item"><span class="dot"></span> 3D ANIME AVATAR</span>
+        <span class="marquee-item"><span class="dot"></span> VISION CAPABLE</span>
+        <span class="marquee-item"><span class="dot"></span> PERSISTENT MEMORY</span>
+        <span class="marquee-item"><span class="dot"></span> MULTI-PROVIDER LLM</span>
+        <span class="marquee-item"><span class="dot"></span> ON-DEVICE SPEECH</span>
+        <span class="marquee-item"><span class="dot"></span> ELEVENLABS TTS</span>
+        <span class="marquee-item"><span class="dot"></span> OPEN SOURCE</span>
+        <span class="marquee-item"><span class="dot"></span> HANDS-FREE VOICE</span>
+        <span class="marquee-item"><span class="dot"></span> 3D ANIME AVATAR</span>
+        <span class="marquee-item"><span class="dot"></span> VISION CAPABLE</span>
+        <span class="marquee-item"><span class="dot"></span> PERSISTENT MEMORY</span>
+        <span class="marquee-item"><span class="dot"></span> MULTI-PROVIDER LLM</span>
+        <span class="marquee-item"><span class="dot"></span> ON-DEVICE SPEECH</span>
+        <span class="marquee-item"><span class="dot"></span> ELEVENLABS TTS</span>
+        <span class="marquee-item"><span class="dot"></span> OPEN SOURCE</span>
+    </div>
+</div>
+
+<!-- Features -->
+<section class="features" id="features">
+    <h2>Features</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">&#x1f5e3;</div>
+            <h3>Hands-Free Voice Chat</h3>
+            <p>Always-on speech recognition. Just talk naturally and your message auto-sends after a brief pause. Live captions show what you and the AI are saying.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#x1f9d1;&#x200d;&#x1f3a4;</div>
+            <h3>3D Anime Avatar</h3>
+            <p>A fully animated VRM character with lip sync, idle animations, and expressions. Powered by Three.js and Amica's open-source avatar engine.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#x1f441;</div>
+            <h3>Vision</h3>
+            <p>Front camera feeds to the AI so it can see what you see. No preview shown by default for a clean, privacy-first experience.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#x1f9e0;</div>
+            <h3>Persistent Memory</h3>
+            <p>The AI extracts and remembers key details from your conversations. It builds context over time so interactions feel personal.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#x1f504;</div>
+            <h3>Multi-Provider LLM</h3>
+            <p>Choose your AI brain: Gemini, OpenAI, Claude, Ollama, OpenRouter, xAI, or Together AI. Switch anytime in settings.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">&#x1f50a;</div>
+            <h3>Premium TTS</h3>
+            <p>Hear your companion speak with ElevenLabs, OpenAI TTS, or native iOS voices. Natural and expressive text-to-speech.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Privacy Policy -->
+<section class="legal" id="privacy">
+    <h2>Privacy Policy</h2>
+    <p><em>Last updated: March 16, 2026</em></p>
+
+    <h3>Overview</h3>
+    <p>Scowld is designed with privacy in mind. Your data stays on your device unless you explicitly choose to use cloud AI providers.</p>
+
+    <h3>Data Collection</h3>
+    <p>Scowld does <strong>not</strong> collect, store, or transmit any personal data to our servers. We do not have servers. The app runs entirely on your device.</p>
+
+    <h3>Third-Party Services</h3>
+    <p>When you configure an AI provider (Gemini, OpenAI, Claude, etc.), your messages are sent to that provider's API for processing. This is governed by their respective privacy policies:</p>
+    <ul>
+        <li>Google Gemini: <a href="https://ai.google.dev/terms" target="_blank">ai.google.dev/terms</a></li>
+        <li>OpenAI: <a href="https://openai.com/policies/privacy-policy" target="_blank">openai.com/policies/privacy-policy</a></li>
+        <li>Anthropic (Claude): <a href="https://www.anthropic.com/privacy" target="_blank">anthropic.com/privacy</a></li>
+        <li>ElevenLabs: <a href="https://elevenlabs.io/privacy" target="_blank">elevenlabs.io/privacy</a></li>
+    </ul>
+
+    <h3>Camera &amp; Microphone</h3>
+    <p>Camera and microphone data is processed on-device for speech recognition (Apple Speech framework) and sent to your configured AI provider only when you send a message. No audio or video is stored or transmitted elsewhere.</p>
+
+    <h3>API Keys</h3>
+    <p>Your API keys are stored securely in the iOS Keychain on your device. They are never transmitted to us or any third party other than the respective AI provider.</p>
+
+    <h3>Local Storage</h3>
+    <p>Chat history and memories are stored locally on your device using CoreData. You can clear all data at any time from Settings.</p>
+
+    <h3>Contact</h3>
+    <p>For privacy concerns, contact: <a href="mailto:ad13dtu@gmail.com">ad13dtu@gmail.com</a></p>
+</section>
+
+<!-- Terms of Service -->
+<section class="legal" id="terms">
+    <h2>Terms of Service</h2>
+    <p><em>Last updated: March 16, 2026</em></p>
+
+    <h3>Acceptance</h3>
+    <p>By using Scowld, you agree to these terms. If you do not agree, do not use the app.</p>
+
+    <h3>Description</h3>
+    <p>Scowld is an open-source AI companion app that provides conversational AI through third-party providers. It is provided "as is" without warranties of any kind.</p>
+
+    <h3>Your Responsibilities</h3>
+    <ul>
+        <li>You are responsible for your own API keys and any charges from AI providers.</li>
+        <li>You must comply with the terms of service of any third-party AI provider you use.</li>
+        <li>You must not use the app for any illegal or harmful purposes.</li>
+    </ul>
+
+    <h3>Limitations</h3>
+    <ul>
+        <li>AI responses may be inaccurate. Do not rely on them for medical, legal, or financial advice.</li>
+        <li>We are not responsible for any costs incurred through third-party API usage.</li>
+        <li>The app requires an internet connection for AI features (except on-device speech recognition).</li>
+    </ul>
+
+    <h3>Open Source</h3>
+    <p>Scowld is released under the MIT License. You are free to use, modify, and distribute the source code in accordance with the license terms.</p>
+
+    <h3>Changes</h3>
+    <p>We may update these terms at any time. Continued use of the app constitutes acceptance of the updated terms.</p>
+
+    <h3>Contact</h3>
+    <p>Questions about these terms? Contact: <a href="mailto:ad13dtu@gmail.com">ad13dtu@gmail.com</a></p>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-left">
+            <img src="assets/logo.png" alt="Scowld">
+            <span>Scowld</span>
+        </div>
+        <div class="footer-links">
+            <a href="#features">Features</a>
+            <a href="#privacy">Privacy</a>
+            <a href="#terms">Terms</a>
+            <a href="https://github.com/apoorvdarshan/scowld" target="_blank">GitHub</a>
+        </div>
+        <div class="footer-social">
+            <!-- Email -->
+            <a href="mailto:ad13dtu@gmail.com" title="Email">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+            <!-- X (Twitter) -->
+            <a href="https://x.com/apoorvdarshan" target="_blank" title="X">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <!-- LinkedIn -->
+            <a href="https://linkedin.com/in/apoorvdarshan" target="_blank" title="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Apoorv Darshan. All rights reserved. &middot; <a href="mailto:ad13dtu@gmail.com">ad13dtu@gmail.com</a>
+    </div>
+</footer>
+
+</body>
+</html>
