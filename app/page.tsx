@@ -149,7 +149,6 @@ export default function Home() {
               </svg>
               Find us on Product Hunt
             </a>
-            <p className="sr sr-delay-4 hero__beta-note">Only first 100 testers get early access.</p>
           </div>
 
           {/* Right column -- Phone mockup */}
