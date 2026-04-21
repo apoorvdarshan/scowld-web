@@ -1,29 +1,7 @@
 # Scowld Website
 
-Official website for [Scowld](https://github.com/apoorvdarshan/scowld) — an open-source AI companion app for iOS.
+> **This repo is archived and moved to [github.com/apoorvdarshan/scowld](https://github.com/apoorvdarshan/scowld)** (in the [`web/`](https://github.com/apoorvdarshan/scowld/tree/main/web) directory).
+>
+> All future development happens in the monorepo.
 
 **Live:** [scowld.vercel.app](https://scowld.vercel.app)
-
-## Stack
-
-- Next.js
-- Vanilla CSS
-- Clash Display font
-- Deployed on Vercel
-
-## Pages
-
-- `/` — Landing page
-- `/privacy` — Privacy Policy
-- `/terms` — Terms of Service
-
-## Development
-
-```bash
-npm install
-npm run dev
-```
-
-## License
-
-MIT
